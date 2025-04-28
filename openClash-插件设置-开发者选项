@@ -5,8 +5,6 @@
 # Add your custom firewall rules here, they will be added after the end of the OpenClash iptables rules 
 LOG_OUT "Tip: Start Add Custom Firewall Rules..."
 
-
-
 # 以下是 GitHub520 加速规则拉取脚本 
 # LOG_OUT "拉取 GitHub520 加速规则…" 
 # sed -i '/# GitHub520 Host Start/,/# GitHub520 Host End/d' /etc/hosts 
