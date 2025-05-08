@@ -344,7 +344,7 @@ config authentication
 config config_subscribe
 	option enabled '1'
 	option name '苏安耀'
-	option address 'http://192.168.5.5:25500/sub?target=clash&url=http%3A%2F%2F192.168.5.5%3A3008%2FT3B9dgzBzdRbBF8Aqx7P%2Fdownload%2Fsuanyao%3Ftarget%3DClashMeta&insert=false&config=https%3A%2F%2Fraw.githubusercontent.com%2Fsuanyao%2Fclash%2Frefs%2Fheads%2Fmain%2F555.ini&emoji=true&list=false&tfo=false&scv=true&fdn=false&expand=true&sort=false&new_name=true'
+	option address 'http://192.168.5.5:25500/sub?'
 	option sub_ua 'clash.meta'
 	option sub_convert '0'
 
