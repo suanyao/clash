@@ -183,7 +183,6 @@ rules:
   - GEOSITE,geolocation-!cn,国外
   - GEOSITE,category-public-tracker,国内
   - RULE-SET,Direct / Domain,国内
-  - RULE-SET,Private / Domain,国内
   - GEOSITE,CN,国内
   - GEOIP,CN,国内
   - MATCH,其他
