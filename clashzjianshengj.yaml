@@ -123,6 +123,7 @@ proxy-groups:
   - {name: Google, <<: *default}
   - {name: Test, <<: *default}
   - {name: Block, <<: *default}
+  - {name: geolocation, <<: *default}
   - {name: 国外, <<: *default}
   - {name: 国内,<<: *default,type: select, proxies: [直连, 自动选择]}
   - {name: 漏网之鱼,<<: *default}
