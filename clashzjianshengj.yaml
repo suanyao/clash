@@ -188,7 +188,7 @@ rules:
   - GEOSITE,category-public-tracker,国内
   - RULE-SET,Direct / Domain,国内
   - RULE-SET,China / Domain,国内
-  - RULE-SET,China / IP,国内
+  - RULE-SET,China / IP,国内,no-resolve
   - MATCH,漏网之鱼
 # ========================
 # 规则集提供者
