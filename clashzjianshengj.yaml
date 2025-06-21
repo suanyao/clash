@@ -118,7 +118,7 @@ proxy-groups:
   - {name: Crypto, <<: *default}
   - {name: Amazon, <<: *default}
   - {name: Apple, <<: *default,type: select, proxies: [直连, 自动选择]}
-  - {name: Microsoft, <<: *default}
+  - {name: Microsoft, <<: *default,type: select, proxies: [直连, 自动选择]}
   - {name: Google, <<: *default}
   - {name: Test, <<: *default}
   - {name: Block, <<: *default}
