@@ -58,8 +58,7 @@ dns:
   cache-enabled: false  
   nameserver:
     - 202.103.224.68  
-    - 202.103.225.68  
-    - 119.29.29.29    
+    - 202.103.225.68     
     
   proxy-server-nameserver:
     - https://1.1.1.1/dns-query  
