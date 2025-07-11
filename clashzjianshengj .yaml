@@ -7,7 +7,7 @@
 # 机场节点订阅
 proxy-providers:
   zj:
-    url: "http://192.168.5.5:3008/T3B9dgzBzdRbBF8Aqx7P/download/%E6%88%91%E8%87%AA%E5%B7%B1%E7%9A%84?target=ClashMeta"
+    url: "http://192.168.5.5:3008/"
     type: http
     interval: 86400
     health-check:
