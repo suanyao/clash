@@ -1,0 +1,235 @@
+# Clash 配置文件
+
+# ========================
+# Clash-ALL 优化配置
+# ========================
+
+# 机场节点订阅
+proxy-providers:
+  zj:
+    url: "http://192.168.5.5:3008/T3B9dgzBzdRbBF8Aqx7P/download/%E8%87%AA%E5%B7%B1%E7%9A%84?target=ClashMeta"
+    type: http
+    interval: 86400
+    health-check:
+      enable: true
+      url: http://connectivitycheck.gstatic.com/generate_204
+      interval: 300
+    proxy: "直连"
+
+proxies:
+  - {name: 直连, type: direct}
+  
+
+# ========================
+# 主要端口设置
+# ========================
+port: 7890
+socks-port: 7891
+redir-port: 7892
+mixed-port: 7893
+tproxy-port: 7895
+allow-lan: true
+bind-address: "*"
+mode: rule
+tcp-concurrent: true
+log-level: warning
+geodata-mode: false
+                                   
+
+# ========================
+# # 控制面板
+# ========================
+external-controller: 0.0.0.0:9090
+external-ui: ui
+external-ui-name: zashboard
+external-ui-url: https://github.moeyy.xyz/https://github.com/Zephyruso/zashboard/archive/refs/heads/gh-pages.zip
+secret: "SUaoYao198453@[JIn#%]"
+
+# ========================
+# DNS 设置
+# ========================
+dns:
+  enable: true
+  listen: 0.0.0.0:7874
+  ipv6: false
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16
+  respect-rules: true
+  cache-enabled: true
+  cache-ttl: 600    
+  prefetch: true  
+  fake-ip-filter-mode: blacklist
+  fake-ip-filter:                
+     - "rule-set:Private_domain,China_domain"
+     - "+.msftconnecttest.com"
+     - "+.msftncsi.com"
+     - "time.*.com"
+     - "+.market.xiaomi.com"
+  
+  default-nameserver:
+    - 223.5.5.5
+  proxy-server-nameserver:
+    - https://223.5.5.5/dns-query
+  nameserver:
+    - 202.103.224.68
+    - 202.103.225.68  
+  
+  
+
+# ========================
+# TUN 模块
+# ========================
+tun:
+  enable: true
+  stack: gvisor
+  device: utun
+  endpoint-independent-nat: true
+  auto-route: true
+  auto-detect-interface: false
+  auto-redirect: false
+  strict-route: false 
+  
+profile:
+  store-selected: true
+  store-fake-ip: true
+
+# ========================
+# 策略组定义
+# ========================
+default: &default
+  type: select
+  proxies:
+    - 美国节点
+    - 直连
+    
+proxy-groups:
+  - name: 美国节点
+    type: url-test
+    url: "http://connectivitycheck.gstatic.com/generate_204"
+    interval: 300
+    tolerance: 30
+    use: [zj]
+  
+
+  # ===== 业务分流组 =====
+  - {name: ChatGPT, <<: *default}
+  - {name: Claude, <<: *default}
+  - {name: Perplexity, <<: *default}
+  - {name: github, <<: *default}
+  - {name: Telegram, <<: *default}
+  - {name: Twitter(X), <<: *default}
+  - {name: WhatsApp, <<: *default}
+  - {name: Steam, <<: *default,type: select, proxies: [直连, 美国节点]}
+  - {name: Game, <<: *default}
+  - {name: YouTube, <<: *default}
+  - {name: TikTok, <<: *default}
+  - {name: Disney, <<: *default}
+  - {name: Netflix, <<: *default}
+  - {name: HBO, <<: *default}
+  - {name: Spotify, <<: *default}
+  - {name: Crypto, <<: *default}
+  - {name: Amazon, <<: *default}
+  - {name: Apple, <<: *default,type: select, proxies: [直连, 美国节点]}
+  - {name: Microsoft, <<: *default,type: select, proxies: [直连, 美国节点]}
+  - {name: Google, <<: *default}
+  - {name: speedtest, <<: *default}
+  - {name: gfw, <<: *default}
+  - {name: 国外, <<: *default}
+  - {name: 国内, type: select, proxies: [直连]}
+  - {name: 漏网之鱼,<<: *default}
+  
+# ========================
+# 规则引擎（rules）
+# ========================
+rules:
+   - RULE-SET,Private_domain,国内             
+   - RULE-SET,private_IP,国内,no-resolve   
+   - RULE-SET,Youtube_domain,YouTube    
+   - RULE-SET,Telegram_domain,Telegram                        
+   - RULE-SET,Google_domain,Google
+   - RULE-SET,ChatGPT_domain,ChatGPT
+   - RULE-SET,github_domain,github 
+   - RULE-SET,Proxy_domain,国外
+   - RULE-SET,Claude_domain,Claude          
+   - RULE-SET,WhatsApp_domain,WhatsApp
+   - RULE-SET,Twitter_domain,Twitter(X)
+   - RULE-SET,Amazon_domain,Amazon
+   - RULE-SET,OKX_domain,Crypto
+   - RULE-SET,Bybit_domain,Crypto
+   - RULE-SET,Binance_domain,Crypto
+   - RULE-SET,TikTok_domain,TikTok
+   - RULE-SET,Netflix_domain,Netflix
+   - RULE-SET,Disney_domain,Disney
+   - RULE-SET,HBO_domain,HBO
+   - RULE-SET,Spotify_domain,Spotify
+   - RULE-SET,Steam_domain,Steam
+   - RULE-SET,Epic_domain,Game
+   - RULE-SET,EA_domain,Game
+   - RULE-SET,Blizzard_domain,Game
+   - RULE-SET,UBI_domain,Game
+   - RULE-SET,playstation_domain,Game
+   - RULE-SET,nintend_domain,Game
+   - RULE-SET,Microsoft_domain,Microsoft
+   - RULE-SET,Apple_domain,Apple
+   - RULE-SET,Apple-CN_domain,Apple
+   - RULE-SET,Perplexity_domain,Perplexity
+   - RULE-SET,speedtest_domain,speedtest
+   - RULE-SET,gfw_domain,gfw
+   - RULE-SET,geolocation-!cn_domain,国外 
+   - RULE-SET,China_domain,国内  
+   - RULE-SET,Google_IP,Google,no-resolve
+   - RULE-SET,Telegram_IP,Telegram,no-resolve
+   - RULE-SET,Netflix_IP,Netflix,no-resolve  
+   - RULE-SET,China_IP,国内,no-resolve    
+   - MATCH,漏网之鱼
+# ========================
+# 规则集提供者
+# ========================
+rule-anchor:
+  ip: &ip {type: http, interval: 86400, behavior: ipcidr, format: mrs}
+  domain: &domain {type: http, interval: 86400, behavior: domain, format: mrs}
+  class: &class {type: http, interval: 86400, behavior: classical, format: text}
+  
+
+rule-providers:
+  speedtest_domain: {<<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/ookla-speedtest.mrs"}
+  ChatGPT_domain: {<<: *domain, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/category-ai-!cn.mrs"}
+  Claude_domain: {<<: *class, url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Claude/Claude.list"}
+  Perplexity_domain: {<<: *domain, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/perplexity.mrs"}
+  Copilot_domain: {<<: *class, url: "https://raw.githubusercontent.com/liandu2024/clash/refs/heads/main/list/Copilot.list"}
+  github_domain: {<<: *domain, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/github.mrs"}
+  Telegram_domain: {<<: *domain, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/telegram.mrs"}  
+  Telegram_IP: {<<: *ip, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geoip/telegram.mrs"}
+  Twitter_domain: {<<: *domain, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/x.mrs"}
+  WhatsApp_domain: {<<: *domain, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/whatsapp.mrs"}
+  gfw_domain: {<<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/gfw.mrs"}
+  Amazon_domain: {<<: *domain, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/amazon.mrs"}
+  Apple-CN_domain: {<<: *domain, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/apple-cn.mrs"}
+  Apple_domain: {<<: *domain, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/apple.mrs"} 
+  Microsoft_domain: {<<: *domain, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/microsoft.mrs"}
+  OKX_domain: {<<: *domain, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/okx.mrs"}
+  Bybit_domain: {<<: *domain, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/bybit.mrs"}
+  Binance_domain: {<<: *domain, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/binance.mrs"}
+  TikTok_domain: {<<: *domain, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/tiktok.mrs"}
+  Netflix_domain: {<<: *domain, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/netflix.mrs"}
+  Netflix_IP: {<<: *ip, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geoip/netflix.mrs"}
+  Disney_domain: {<<: *domain, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/disney.mrs"}
+  HBO_domain: {<<: *domain, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/hbo.mrs"}
+  Spotify_domain: {<<: *domain, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/spotify.mrs"}
+  Steam_domain: {<<: *domain, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/steam.mrs"}
+  Epic_domain: {<<: *domain, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/epicgames.mrs"}
+  EA_domain: {<<: *domain, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/ea.mrs"}
+  Blizzard_domain: {<<: *domain, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/blizzard.mrs"}
+  UBI_domain: {<<: *domain, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/ubisoft.mrs"}
+  playstation_domain: {<<: *domain, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/playstation.mrs"}
+  nintend_domain: {<<: *domain, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/nintendo.mrs"}
+  Proxy_domain:  {<<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo-lite/geosite/proxy.mrs"}
+  geolocation-!cn_domain: {<<: *domain, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/geolocation-!cn.mrs"} 
+  China_domain: {<<: *domain, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/cn.mrs"}
+  China_IP: {<<: *ip, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geoip/cn.mrs"}
+  Private_domain: {<<: *domain, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/private.mrs"}
+  private_IP: {<<: *ip, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geoip/private.mrs"}
+  Youtube_domain: {<<: *domain, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/youtube.mrs"}  
+  Google_domain: {<<: *domain, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/google.mrs"}  
+  Google_IP: {<<: *ip, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geoip/google.mrs"}
+
