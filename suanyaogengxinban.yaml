@@ -68,11 +68,11 @@ dns:
   default-nameserver:
     - 127.0.0.1:5336
   proxy-server-nameserver:
+    - tls://1.1.1.1
     - tls://dns.google 
     - https://dns.google/dns-query
     - https://dns.quad9.net/dns-query 
-    - https://cloudflare-dns.com/dns-query
-    - tls://1.1.1.1  
+    - https://cloudflare-dns.com/dns-query  
     - 114.114.114.114  
     - 8.8.8.8  
   nameserver:
@@ -237,3 +237,4 @@ rule-providers:
   Telegram_IP: {<<: *ip, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geoip/telegram.mrs"}
   Google_IP: {<<: *ip, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geoip/google.mrs"}
   China_IP: {<<: *ip, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geoip/cn.mrs"}
+
