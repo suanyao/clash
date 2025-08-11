@@ -70,7 +70,7 @@ dns:
   proxy-server-nameserver:
     - tls://1.1.1.1
     - https://dns.cloudflare.com/dns-query
-    - 8.8.8.8
+    - tls://8.8.8.8
   nameserver:
     - 127.0.0.1:5336
     
@@ -233,4 +233,5 @@ rule-providers:
   Telegram_IP: {<<: *ip, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geoip/telegram.mrs"}
   Google_IP: {<<: *ip, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geoip/google.mrs"}
   China_IP: {<<: *ip, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geoip/cn.mrs"}
+
 
