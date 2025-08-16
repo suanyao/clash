@@ -71,6 +71,7 @@ dns:
     - 45.90.28.197
     - 185.228.168.9
     - 8.20.247.231
+    - 209.244.0.3
     - 8.20.247.25
   nameserver:
     - 127.0.0.1:5336
@@ -234,3 +235,4 @@ rule-providers:
   Telegram_IP: {<<: *ip, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geoip/telegram.mrs"}
   Google_IP: {<<: *ip, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geoip/google.mrs"}
   China_IP: {<<: *ip, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geoip/cn.mrs"}
+
