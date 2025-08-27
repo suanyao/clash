@@ -6,7 +6,7 @@
 # 机场节点订阅
 proxy-providers:
   ds:
-    url: "http://192.168.5.5:3008/T3B9dgzBzdRbBF8Aqx7P/download/DC3?target=ClashMeta"
+    url: "http://192.168.5.5:3008/T3B9dgzBzdRbBF8Aqx7P/download/D3?target=ClashMeta"
     type: http
     interval: 86400
     health-check:
@@ -235,3 +235,4 @@ rule-providers:
   Telegram_IP: {<<: *ip, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geoip/telegram.mrs"}
   Google_IP: {<<: *ip, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geoip/google.mrs"}
   China_IP: {<<: *ip, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geoip/cn.mrs"}
+
