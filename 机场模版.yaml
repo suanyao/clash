@@ -32,8 +32,6 @@ bind-address: "*"
 mode: rule
 log-level: info
 geodata-mode: false                                   
-route-exclude-address-set:
-    - "rule-set:China_IP"
 # ========================
 # # 控制面板
 # ========================
@@ -231,3 +229,4 @@ rule-providers:
   Telegram_IP: {<<: *ip, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geoip/telegram.mrs"}
   Google_IP: {<<: *ip, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geoip/google.mrs"}
   China_IP: {<<: *ip, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geoip/cn.mrs"}
+
