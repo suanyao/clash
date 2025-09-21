@@ -7,11 +7,11 @@ proxies:
     name: "🇺🇸 h2"
     server: hui.suanyao.top
     port: 443
-    password: "suanyao.EO0EEW.EwjYGb"
+    password: ""
     sni: "hui.suanyao.top"
     skip-cert-verify: false
     obfs: salamander
-    obfs-password: "SUaoYao198453@[JIn#%]"
+    obfs-password: ""
   - {name: 直连, type: direct}
 # ========================
 # 主要端口设置
@@ -192,3 +192,4 @@ rule-providers:
   Google_IP: {<<: *ip, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geoip/google.mrs"}
   China_IP: {<<: *ip, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geoip/cn.mrs"}
   cloudflare_IP: {<<: *ip, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/cloudflare.mrs"}
+
