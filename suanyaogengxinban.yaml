@@ -2,18 +2,17 @@
 # ========================
 # Clash 配置文件
 # ========================
+proxy-providers:
+  ds:
+    url: "http://192.168.5.5:3010/T3B9dgzBzdRbBF8ASb1E/download/DC3?target=ClashMeta"
+    type: http
+    interval: 86400
+    health-check:
+      enable: true
+      url: https://www.gstatic.com/generate_204
+      interval: 300
+      proxy: "直连"
 proxies:
-  - type: hysteria2
-    name: "🇺🇸 h2"
-    server: 
-    port: 443
-    password: "  "
-    sni: "  "
-    skip-cert-verify: false
-    obfs: salamander
-    obfs-password: "  "
-    alpn: 
-       - h3
   - {name: 直连, type: direct}
 # ========================
 # 主要端口设置
@@ -90,9 +89,11 @@ default: &default
     - 直连    
 proxy-groups:
   - name: 美国节点
-    type: select
-    proxies: 
-         - "🇺🇸 h2" 
+    type: url-test
+    interval: 300
+    tolerance: 50
+    use: 
+         - ds 
   # ===== 业务分流组 =====
   - {name: Steam, type: select, proxies: [直连, 美国节点]}
   - {name: Apple, type: select, proxies: [直连, 美国节点]}
@@ -190,4 +191,3 @@ rule-providers:
   Google_IP: {<<: *ip, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geoip/google.mrs"}
   China_IP: {<<: *ip, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geoip/cn.mrs"}
   cloudflare_IP: {<<: *ip, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/cloudflare.mrs"}
-
