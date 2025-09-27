@@ -5,13 +5,13 @@
 proxies:
   - type: hysteria2
     name: "🇺🇸 h2"
-    server: hui.suanyao.top
+    server:  
     port: 443
-    password: "suanyao.EO0EEW.EwjYGb"
-    sni: "hui.suanyao.top"
+    password: "  "
+    sni: "  "
     skip-cert-verify: false
     obfs: salamander
-    obfs-password: "SUaoYao198453@[JIn#%]"
+    obfs-password: "  "
     alpn: 
        - h3
   - {name: 直连, type: direct}
@@ -190,3 +190,4 @@ rule-providers:
   Google_IP: {<<: *ip, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geoip/google.mrs"}
   China_IP: {<<: *ip, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geoip/cn.mrs"}
   cloudflare_IP: {<<: *ip, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/cloudflare.mrs"}
+
