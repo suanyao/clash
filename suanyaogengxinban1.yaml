@@ -61,7 +61,7 @@ dns:
      - 8.8.8.8                              
      - 1.1.1.1  
   nameserver:
-     - 127.0.0.1:5336
+     - 192.168.5.5:5336
 # ========================
 # TUN 模块
 # ========================
@@ -189,6 +189,7 @@ rule-providers:
   China_IP: {<<: *ip, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geoip/cn.mrs"}
   cloudflare_IP: {<<: *ip, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/cloudflare.mrs"}
   apple_ip: {<<: *ip, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo-lite/geoip/apple.mrs"}
+
 
 
 
