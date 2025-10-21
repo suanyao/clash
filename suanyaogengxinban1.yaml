@@ -100,7 +100,8 @@ proxy-groups:
 # 规则引擎（rules）
 # ========================
 rules:      
-   - RULE-SET,private_IP,国内,no-resolve 
+   - RULE-SET,private_IP,国内,no-resolve
+   - RULE-SET,China_IP,国内,no-resolve
    - RULE-SET,Private_domain,国内  
    - RULE-SET,Youtube_domain,美国节点    
    - RULE-SET,Telegram_domain,美国节点
@@ -138,8 +139,7 @@ rules:
    - RULE-SET,Telegram_IP,美国节点,no-resolve
    - RULE-SET,Netflix_IP,美国节点,no-resolve
    - RULE-SET,cloudflare_IP,美国节点,no-resolve
-   - RULE-SET,China_domain,国内
-   - RULE-SET,China_IP,国内,no-resolve    
+   - RULE-SET,China_domain,国内    
    - MATCH,漏网之鱼
 # ========================
 # 规则集提供者
@@ -189,6 +189,7 @@ rule-providers:
   China_IP: {<<: *ip, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geoip/cn.mrs"}
   cloudflare_IP: {<<: *ip, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/cloudflare.mrs"}
   apple_ip: {<<: *ip, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo-lite/geoip/apple.mrs"}
+
 
 
 
