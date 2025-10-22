@@ -45,7 +45,7 @@ dns:
   enhanced-mode: fake-ip
   fake-ip-range: 198.18.0.1/16
   respect-rules: true
-  cache-enabled: false    
+  cache-enabled: true    
   prefetch: true  
   proxy-dns: true
   fake-ip-filter-mode: blacklist
@@ -61,7 +61,8 @@ dns:
      - 8.8.8.8                              
      - 1.1.1.1  
   nameserver:
-     - 192.168.5.5:5336
+     - 202.103.224.68
+     - 202.103.225.68
 # ========================
 # TUN 模块
 # ========================
@@ -195,6 +196,7 @@ rule-providers:
   China_IP: {<<: *ip, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geoip/cn.mrs"}
   cloudflare_IP: {<<: *ip, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/cloudflare.mrs"}
   apple_ip: {<<: *ip, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo-lite/geoip/apple.mrs"}
+
 
 
 
