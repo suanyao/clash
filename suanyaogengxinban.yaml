@@ -36,6 +36,12 @@ external-ui-name: zashboard
 external-ui-url: https://github.moeyy.xyz/https://github.com/Zephyruso/zashboard/archive/refs/heads/gh-pages.zip
 secret: "SUaoYao198453@[JIn#%]"
 # ========================
+# 顶级配置（与 dns 平级）
+# ========================
+default-nameserver:    
+   - 223.5.5.5
+   - 119.29.29.29
+# ========================
 # DNS 设置
 # ========================
 dns:
@@ -198,6 +204,7 @@ rule-providers:
   China_IP: {<<: *ip, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geoip/cn.mrs"}
   cloudflare_IP: {<<: *ip, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/cloudflare.mrs"}
   apple_ip: {<<: *ip, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo-lite/geoip/apple.mrs"}
+
 
 
 
