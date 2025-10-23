@@ -72,6 +72,13 @@ dns:
      - 202.103.224.68
      - 202.103.225.68
 # ========================
+# 域名服务器策略 (Nameserver Policy)
+# ========================
+nameserver-policy:
+  "rule-set:China_domain": [202.103.224.68, 202.103.225.68]
+  "rule-set:Private_domain": [202.103.224.68, 202.103.225.68]
+  "rule-set:geolocation-!cn_domain": [https://cloudflare-dns.com/dns-query, 1.1.1.1]
+# ========================
 # TUN 模块
 # ========================
 tun:
@@ -204,6 +211,7 @@ rule-providers:
   China_IP: {<<: *ip, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geoip/cn.mrs"}
   cloudflare_IP: {<<: *ip, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/cloudflare.mrs"}
   apple_ip: {<<: *ip, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo-lite/geoip/apple.mrs"}
+
 
 
 
