@@ -55,7 +55,6 @@ dns:
   cache-size: 4096  
   cache-optimistic: true 
   prefetch: true  
-  proxy-dns: true
   fake-ip-filter-mode: blacklist
   fake-ip-filter:                
      - "rule-set:Private_domain,China_domain"
@@ -64,10 +63,7 @@ dns:
      - "time.*.com"
      - "+.market.xiaomi.com" 
   proxy-server-nameserver:
-     - https://cloudflare-dns.com/dns-query  
-     - https://dns.google/dns-query        
-     - 8.8.8.8                              
-     - 1.1.1.1    
+     - 119.29.29.29   
   nameserver:
      - 202.103.224.68
      - 202.103.225.68
@@ -213,6 +209,7 @@ rule-providers:
   China_IP: {<<: *ip, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geoip/cn.mrs"}
   cloudflare_IP: {<<: *ip, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/cloudflare.mrs"}
   apple_ip: {<<: *ip, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo-lite/geoip/apple.mrs"}
+
 
 
 
