@@ -25,7 +25,7 @@ tproxy-port: 7895
 allow-lan: true
 bind-address: "*"
 mode: rule
-log-level: warning                                   
+log-level: warning                                  
 # ========================
 # # 控制面板
 # ========================
@@ -34,12 +34,6 @@ external-ui: ui
 external-ui-name: zashboard
 external-ui-url: https://gh-proxy.com/github.com/Zephyruso/zashboard/archive/refs/heads/gh-pages.zip
 secret: "123456"
-# ========================
-# 默认 DNS 解析器
-# ========================
-default-nameserver:    
-    - 223.5.5.5
-    - 119.29.29.29
 # ========================
 # DNS 设置
 # ========================
@@ -50,22 +44,18 @@ dns:
   enhanced-mode: fake-ip
   fake-ip-range: 198.18.0.1/16
   respect-rules: true
-  cache-enabled: true
-  cache-size: 4096  
-  cache-optimistic: true 
+  cache-enabled: false     
   prefetch: true  
   fake-ip-filter-mode: blacklist
-  fake-ip-filter:                
-     - "rule-set:Private_domain,China_domain"
-     - "+.msftconnecttest.com"
-     - "+.msftncsi.com"
-     - "time.*.com"
-     - "+.market.xiaomi.com" 
+  fake-ip-filter:  
+     - +.lan
+     - +.local
+     - geosite:cn
   proxy-server-nameserver:
-     - 119.29.29.29   
+     - 223.5.5.5
+     - 119.29.29.29
   nameserver:
-     - 202.103.224.68
-     - 202.103.225.68
+     - 192.168.5.5:5336
 # ========================
 # TUN 模块
 # ========================
@@ -87,71 +77,71 @@ experimental:
 
 profile:
   store-selected: true
-  store-fake-ip: false
+  store-fake-ip: true
 # ========================
 # 策略组定义
 # ========================
 default: &default
   type: select
   proxies:
-    - 美国节点
+    - US
     - 直连    
 proxy-groups:
-  - name: 美国节点
+  - name: US
     type: url-test
     interval: 300
     tolerance: 50
     use: 
          - ds 
   # ===== 业务分流组 =====
-  - {name: Steam, type: select, proxies: [直连, 美国节点]}
-  - {name: Microsoft, type: select, proxies: [直连, 美国节点]}
+  - {name: Steam, type: select, proxies: [直连, US]}
+  - {name: Microsoft, type: select, proxies: [直连, US]}
   - {name: 国内, type: select, proxies: [直连]}
   - {name: 漏网之鱼,<<: *default} 
 # ========================
 # 规则引擎（rules）
 # ========================
-rules:      
-   - RULE-SET,private_IP,国内,no-resolve
-   - RULE-SET,China_IP,国内,no-resolve
-   - RULE-SET,Private_domain,国内  
-   - RULE-SET,Youtube_domain,美国节点    
-   - RULE-SET,Telegram_domain,美国节点
-   - RULE-SET,cloudflare_domain,美国节点                       
-   - RULE-SET,Google_domain,美国节点
-   - RULE-SET,ChatGPT_domain,美国节点
-   - RULE-SET,github_domain,美国节点          
-   - RULE-SET,WhatsApp_domain,美国节点
-   - RULE-SET,Twitter_domain,美国节点
-   - RULE-SET,Amazon_domain,美国节点
-   - RULE-SET,OKX_domain,美国节点
-   - RULE-SET,Bybit_domain,美国节点
-   - RULE-SET,Binance_domain,美国节点
-   - RULE-SET,TikTok_domain,美国节点
-   - RULE-SET,Netflix_domain,美国节点
-   - RULE-SET,Disney_domain,美国节点
-   - RULE-SET,HBO_domain,美国节点
-   - RULE-SET,Spotify_domain,美国节点
+rules:    
+   - RULE-SET,Youtube_domain,US    
+   - RULE-SET,Telegram_domain,US
+   - RULE-SET,cloudflare_domain,US                      
+   - RULE-SET,ChatGPT_domain,US
+   - RULE-SET,github_domain,US   
+   - RULE-SET,Google_domain,US      
+   - RULE-SET,WhatsApp_domain,US
+   - RULE-SET,Twitter_domain,US
+   - RULE-SET,Amazon_domain,US
+   - RULE-SET,OKX_domain,US
+   - RULE-SET,Bybit_domain,US
+   - RULE-SET,Binance_domain,US
+   - RULE-SET,TikTok_domain,US
+   - RULE-SET,Netflix_domain,US
+   - RULE-SET,Disney_domain,US
+   - RULE-SET,HBO_domain,US
+   - RULE-SET,Spotify_domain,US
    - RULE-SET,Steam_domain,Steam
    - RULE-SET,Steamcn_domain,Steam
-   - RULE-SET,Epic_domain,美国节点
-   - RULE-SET,EA_domain,美国节点
-   - RULE-SET,Blizzard_domain,美国节点
-   - RULE-SET,UBI_domain,美国节点
-   - RULE-SET,playstation_domain,美国节点
-   - RULE-SET,nintend_domain,美国节点
+   - RULE-SET,Epic_domain,US
+   - RULE-SET,EA_domain,US
+   - RULE-SET,Blizzard_domain,US
+   - RULE-SET,UBI_domain,US
+   - RULE-SET,playstation_domain,US
+   - RULE-SET,nintend_domain,US
    - RULE-SET,Microsoft_domain,Microsoft
-   - RULE-SET,Apple_domain,国内
-   - RULE-SET,Apple-CN_domain,美国节点
-   - RULE-SET,Perplexity_domain,美国节点
-   - RULE-SET,speedtest_domain,美国节点
-   - RULE-SET,geolocation-!cn_domain,美国节点 
+   - RULE-SET,Apple-CN_domain,US
+   - RULE-SET,Perplexity_domain,US
+   - RULE-SET,speedtest_domain,US
+   - RULE-SET,geolocation-!cn_domain,US
+   - RULE-SET,Google_IP,US,no-resolve
+   - RULE-SET,Telegram_IP,US,no-resolve
+   - RULE-SET,Netflix_IP,US,no-resolve
+   - RULE-SET,cloudflare_IP,US,no-resolve
    - RULE-SET,apple_ip,国内,no-resolve
-   - RULE-SET,Google_IP,美国节点,no-resolve
-   - RULE-SET,Telegram_IP,美国节点,no-resolve
-   - RULE-SET,Netflix_IP,美国节点,no-resolve
-   - RULE-SET,cloudflare_IP,美国节点,no-resolve
-   - RULE-SET,China_domain,国内  
+   - RULE-SET,Apple_domain,国内
+   - RULE-SET,Private_domain,国内
+   - RULE-SET,China_domain,国内 
+   - RULE-SET,private_IP,国内,no-resolve 
+   - RULE-SET,China_IP,国内,no-resolve  
    - MATCH,漏网之鱼
 # ========================
 # 规则集提供者
