@@ -43,7 +43,7 @@ dns:
   enhanced-mode: fake-ip
   fake-ip-range: 198.18.0.1/16
   respect-rules: false
-  cache-enabled: false     
+  cache-enabled: true     
   prefetch: true  
   fake-ip-filter-mode: blacklist
   fake-ip-filter:  
@@ -51,8 +51,9 @@ dns:
      - +.local
      - geosite:cn
   proxy-server-nameserver:
-     - 223.5.5.5
-     - 119.29.29.29
+     - https://cloudflare-dns.com/dns-query
+     - 1.1.1.1
+     - 8.8.8.8
   nameserver:
      - 192.168.5.5:5336
 # ========================
@@ -60,7 +61,7 @@ dns:
 # ========================
 tun:
   enable: true
-  stack: gvisor
+  stack: mixed
   device: utun
   dns-hijack: ["any:53", "tcp://any:53"]
   endpoint-independent-nat: true
@@ -188,6 +189,7 @@ rule-providers:
   China_IP: {<<: *ip, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geoip/cn.mrs"}
   cloudflare_IP: {<<: *ip, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/cloudflare.mrs"}
   apple_ip: {<<: *ip, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo-lite/geoip/apple.mrs"}
+
 
 
 
