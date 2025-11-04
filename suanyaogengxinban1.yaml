@@ -25,7 +25,12 @@ allow-lan: true
 bind-address: "*"
 mode: rule
 log-level: warning   
-geodata-mode: false
+unified-delay: true          
+tcp-concurrent: true          
+find-process-mode: 'off'      
+global-client-fingerprint: chrome 
+keep-alive-idle: 600          
+keep-alive-interval: 15         
 # ========================
 # # 控制面板
 # ========================
@@ -48,11 +53,12 @@ dns:
   proxy-dns: true
   fake-ip-filter-mode: blacklist
   fake-ip-filter:  
-     - "rule-set:Private_domain,China_domain"
+     - "+.lan"
+     - "+.local" 
+     - "geosite:cn"
      - "+.msftconnecttest.com"
      - "+.msftncsi.com"
-     - "time.*.com"
-     - "+.market.xiaomi.com" 
+     - "time.*.com" 
   proxy-server-nameserver:   
      - 223.5.5.5
   nameserver:
@@ -100,7 +106,8 @@ proxy-groups:
 # ========================
 # 规则引擎（rules）
 # ========================
-rules:      
+rules:
+   - RULE-SET,private_IP,国内,no-resolve
    - RULE-SET,Private_domain,国内  
    - RULE-SET,Youtube_domain,美国节点    
    - RULE-SET,Telegram_domain,美国节点
@@ -133,8 +140,7 @@ rules:
    - RULE-SET,Perplexity_domain,美国节点
    - RULE-SET,speedtest_domain,美国节点
    - RULE-SET,geolocation-!cn_domain,美国节点
-   - RULE-SET,China_domain,国内 
-   - RULE-SET,private_IP,国内,no-resolve 
+   - RULE-SET,China_domain,国内  
    - RULE-SET,China_IP,国内,no-resolve  
    - RULE-SET,Google_IP,美国节点,no-resolve
    - RULE-SET,Telegram_IP,美国节点,no-resolve
@@ -189,6 +195,7 @@ rule-providers:
   China_IP: {<<: *ip, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geoip/cn.mrs"}
   cloudflare_IP: {<<: *ip, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/cloudflare.mrs"}
   apple_ip: {<<: *ip, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo-lite/geoip/apple.mrs"}
+
 
 
 
