@@ -32,14 +32,6 @@ global-client-fingerprint: chrome
 keep-alive-idle: 600          
 keep-alive-interval: 15         
 # ========================
-# # 控制面板
-# ========================
-external-controller: 0.0.0.0:9090
-external-ui: ui
-external-ui-name: zashboard
-https://github.moeyy.xyz/https://github.com/Zephyruso/zashboard/archive/refs/heads/gh-pages.zip
-secret: "SUaoYao198453@[JIn#%]"
-# ========================
 # DNS 设置
 # ========================
 dns:
@@ -59,8 +51,8 @@ dns:
      - "+.msftncsi.com"
      - "time.*.com" 
   proxy-server-nameserver:   
-     - 1.1.1.1
      - 8.8.8.8
+     - 1.1.1.1
   nameserver:
      - 192.168.5.5:5336
 # ========================
@@ -195,6 +187,7 @@ rule-providers:
   China_IP: {<<: *ip, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geoip/cn.mrs"}
   cloudflare_IP: {<<: *ip, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/cloudflare.mrs"}
   apple_ip: {<<: *ip, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo-lite/geoip/apple.mrs"}
+
 
 
 
