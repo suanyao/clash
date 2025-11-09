@@ -14,6 +14,26 @@ proxies:
     obfs-password: " "
   - {name: 直连, type: direct}
 # ========================
+# 域名嗅探
+# ========================
+sniffer:
+  enable: true
+  override-destination: true 
+  sniff:
+    QUIC:
+      ports:
+        - 443
+        - 8443  
+    TLS:
+      ports:
+        - 443
+        - 8443
+    HTTP:
+      ports:
+        - 80
+        - 8080-8880
+      override-destination: true
+# ========================
 # 主要端口设置
 # ========================
 port: 7890
@@ -22,12 +42,11 @@ redir-port: 7892
 mixed-port: 7893
 tproxy-port: 7895
 allow-lan: true
-bind-address: "*"
 mode: rule
-log-level: warning   
-unified-delay: true                   
+log-level: info
+unified-delay: true                    
 find-process-mode: 'off'      
-global-client-fingerprint: chrome       
+global-client-fingerprint: chrome 
 # ========================
 # DNS 设置
 # ========================
@@ -36,30 +55,30 @@ dns:
   listen: 0.0.0.0:7874
   ipv6: false
   enhanced-mode: fake-ip
-  fake-ip-range: 198.18.0.1/16
-  respect-rules: true
+  fake-ip-range: 198.20.0.1/16  
   prefetch: true
+  respect-rules: true
+  cache-algorithm: none
   fake-ip-filter-mode: blacklist
-  fake-ip-filter:  
-     - "+.lan"
-     - "+.local"
-     - "+.home.arpa"
-     - "ntp.*"
-     - "*.pool.ntp.org"         
-     - "time.*.com"
-     - "time.*.gov"
-     - "router.*"
-     - "localhost.*"
-     - "*.tplinkwifi.net"
-     - "*.asusrouter.com"
-     - "geosite:cn"
-     - "+.msftconnecttest.com"
-     - "+.msftncsi.com"
-  proxy-server-nameserver:   
-     - 8.8.8.8
-     - 1.1.1.1
+  fake-ip-filter:             
+      - "+.lan"
+      - "+.local"
+      - "+.home.arpa"
+      - "ntp.*"
+      - "*.pool.ntp.org"         
+      - "time.*.com"
+      - "time.*.gov"
+      - "router.*"
+      - "localhost.*"
+      - "*.tplinkwifi.net"
+      - "*.asusrouter.com"
+      - "geosite:cn"
+      - "+.msftconnecttest.com"
+      - "+.msftncsi.com"
+  proxy-server-nameserver:
+      - 8.8.8.8
   nameserver:
-     - 192.168.5.5:5336
+      - 192.168.5.5:5336
 # ========================
 # TUN 模块
 # ========================
@@ -67,7 +86,6 @@ tun:
   enable: true
   stack: mixed
   device: utun
-  dns-hijack: ["any:53", "tcp://any:53"]
   endpoint-independent-nat: true
   auto-route: false
   auto-detect-interface: false
@@ -78,7 +96,7 @@ tun:
 # ========================
 experimental:
   quic-go-disable-gso: true
-
+  
 profile:
   store-selected: true
   store-fake-ip: true
@@ -89,7 +107,7 @@ default: &default
   type: select
   proxies:
     - 直连
-    - 美国节点    
+    - 美国节点       
 proxy-groups:
   - name: 美国节点
     type: select
@@ -98,8 +116,8 @@ proxy-groups:
   # ===== 业务分流组 =====
   - {name: Youtube, type: select, proxies: [美国节点, 直连]}
   - {name: Telegram, type: select, proxies: [美国节点, 直连]}
-  - {name: cloudflare, type: select, proxies: [美国节点， 直连]}
-  - {name: Google, 输入: select， proxies: [美国节点, 直连]}
+  - {name: cloudflare, type: select, proxies: [美国节点, 直连]}
+  - {name: Google, type: select, proxies: [美国节点, 直连]}
   - {name: ChatGPT, type: select, proxies: [美国节点, 直连]}
   - {name: github, type: select, proxies: [美国节点, 直连]}
   - {name: WhatsApp, type: select, proxies: [美国节点, 直连]}
@@ -175,8 +193,8 @@ rules:
 # ========================
 rule-anchor:
   ip: &ip {type: http, interval: 86400, behavior: ipcidr, format: mrs}
-  domain: &domain {type: http， interval: 86400， behavior: domain， format: mrs}
-  class: &class {type: http, interval: 86400, behavior: classical， format: text}  
+  domain: &domain {type: http, interval: 86400, behavior: domain, format: mrs}
+  class: &class {type: http, interval: 86400, behavior: classical, format: text}  
 rule-providers:
   speedtest_domain: {<<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/ookla-speedtest.mrs"}
   ChatGPT_domain: {<<: *domain, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/category-ai-!cn.mrs"}
@@ -202,7 +220,7 @@ rule-providers:
   Epic_domain: {<<: *domain, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/epicgames.mrs"}
   EA_domain: {<<: *domain, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/ea.mrs"}
   Blizzard_domain: {<<: *domain, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/blizzard.mrs"}
-  UBI_domain: {<<: *domain, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/ubisoft.mrs"}
+  ubisoft_domain: {<<: *domain, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/ubisoft.mrs"}
   playstation_domain: {<<: *domain, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/playstation.mrs"}
   nintend_domain: {<<: *domain, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/nintendo.mrs"}
   geolocation-!cn_domain: {<<: *domain, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/geolocation-!cn.mrs"} 
@@ -217,18 +235,6 @@ rule-providers:
   Google_IP: {<<: *ip, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geoip/google.mrs"}
   China_IP: {<<: *ip, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geoip/cn.mrs"}
   cloudflare_IP: {<<: *ip, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/cloudflare.mrs"}
-  apple_ip: {<<: *ip, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo-lite/geoip/apple.mrs"}
-
-
-
-
-
-
-
-
-
-
-
 
 
 
