@@ -62,18 +62,11 @@ dns:
   fake-ip-filter:             
       - "+.lan"
       - "+.local"
-      - "+.home.arpa"
-      - "ntp.*"
-      - "*.pool.ntp.org"         
-      - "time.*.com"
-      - "time.*.gov"
-      - "router.*"
-      - "localhost.*"
-      - "*.tplinkwifi.net"
-      - "*.asusrouter.com"
       - "geosite:cn"
       - "+.msftconnecttest.com"
       - "+.msftncsi.com"
+      - "time.*.com"
+      - "+.market.xiaomi.com"
   proxy-server-nameserver:
       - 223.5.5.5
   nameserver:
@@ -149,8 +142,7 @@ proxy-groups:
 rules: 
   - RULE-SET,private_IP,直连,no-resolve
    - RULE-SET,China_IP,直连,no-resolve
-   - RULE-SET,Private_domain,直连 
-   - RULE-SET,NTP_domain,直连   
+   - RULE-SET,Private_domain,直连    
    - RULE-SET,Youtube_domain,Youtube    
    - RULE-SET,Telegram_domain,Telegram
    - RULE-SET,cloudflare_domain,cloudflare                       
@@ -229,13 +221,13 @@ rule-providers:
   Youtube_domain: {<<: *domain, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/youtube.mrs"}  
   Google_domain: {<<: *domain, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/google.mrs"} 
   cloudflare_domain: {<<: *domain, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/cloudflare.mrs"} 
-  NTP_domain: {<<: *domain, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/category-ntp.mrs"}
   private_IP: {<<: *ip, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geoip/private.mrs"}
   Netflix_IP: {<<: *ip, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geoip/netflix.mrs"}
   Telegram_IP: {<<: *ip, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geoip/telegram.mrs"}
   Google_IP: {<<: *ip, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geoip/google.mrs"}
   China_IP: {<<: *ip, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geoip/cn.mrs"}
   cloudflare_IP: {<<: *ip, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/cloudflare.mrs"}
+
 
 
 
