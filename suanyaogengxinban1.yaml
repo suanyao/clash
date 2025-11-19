@@ -19,20 +19,12 @@ proxies:
 sniffer:
   enable: true
   override-destination: true 
+  force-dns-mapping: true 
+  parse-pure-ip: true
   sniff:
-    QUIC:
-      ports:
-        - 443
-        - 8443  
-    TLS:
-      ports:
-        - 443
-        - 8443
-    HTTP:
-      ports:
-        - 80
-        - 8080-8880
-      override-destination: true
+    QUIC: {ports: [443, 8443]}
+    TLS: {ports: [443, 8443]}
+    HTTP: {ports: [80, 8080-8880]， override-destination: true}
 # ========================
 # 主要端口设置
 # ========================
@@ -43,7 +35,7 @@ mixed-port: 7893
 tproxy-port: 7895
 allow-lan: true
 mode: rule
-log-level: info
+log-level: warning
 unified-delay: true                    
 find-process-mode: 'off'      
 # ========================
@@ -55,9 +47,9 @@ dns:
   ipv6: true
   enhanced-mode: fake-ip
   fake-ip-range: 198.20.0.1/16  
-  prefetch: true
   respect-rules: true
-  cache-algorithm: none
+  prefetch: true
+  cache-algorithm: arc
   fake-ip-filter-mode: blacklist
   fake-ip-filter:             
       - "+.lan"
@@ -70,13 +62,18 @@ dns:
   proxy-server-nameserver:
       - 8.8.8.8
   nameserver:
-      - 192.168.5.5:5336
+      - 202.103.224.68
+      - 202.103.225.68
+      - 240e:9:0:100:202:103:224:68
+      - 240e:9:2000:100:202:103:225:68
+      - 180.76.76.76
+      - 223.5.5.5
 # ========================
 # TUN 模块
 # ========================
 tun:
   enable: true
-  stack: mixed
+  stack: gvisor
   device: utun
   endpoint-independent-nat: true
   auto-route: false
@@ -140,9 +137,9 @@ proxy-groups:
 # 规则引擎（rules）
 # ========================
 rules: 
-  - RULE-SET,private_IP,直连,no-resolve
+   - RULE-SET,private_IP,直连,no-resolve
    - RULE-SET,China_IP,直连,no-resolve
-   - RULE-SET,Private_domain,直连    
+   - RULE-SET,Private_domain,直连 
    - RULE-SET,Youtube_domain,Youtube    
    - RULE-SET,Telegram_domain,Telegram
    - RULE-SET,cloudflare_domain,cloudflare                       
