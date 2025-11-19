@@ -23,18 +23,10 @@ redir-port: 7892
 mixed-port: 7893
 tproxy-port: 7895
 allow-lan: true
-bind-address: "*"
 mode: rule
-log-level: warning  
-geodata-mode: false
-# ========================
-# # 控制面板
-# ========================
-external-controller: 0.0.0.0:9090
-external-ui: ui
-external-ui-name: zashboard
-https://github.moeyy.xyz/https://github.com/Zephyruso/zashboard/archive/refs/heads/gh-pages.zip
-secret: "SUaoYao198453@[JIn#%]"
+log-level: warning
+unified-delay: true                    
+find-process-mode: 'off'      
 # ========================
 # DNS 设置
 # ========================
@@ -43,12 +35,13 @@ dns:
   listen: 0.0.0.0:7874
   ipv6: true
   enhanced-mode: fake-ip
-  fake-ip-range: 198.18.0.1/16
-  respect-rules: true     
-  prefetch: true  
+  fake-ip-range: 198.20.0.1/16  
+  respect-rules: true
+  prefetch: true
+  cache-algorithm: arc
   fake-ip-filter-mode: blacklist
-  fake-ip-filter:  
-     - "+.lan"
+  fake-ip-filter:             
+      - "+.lan"
       - "+.local"
       - "geosite:cn"
       - "+.msftconnecttest.com"
@@ -56,17 +49,21 @@ dns:
       - "time.*.com"
       - "+.market.xiaomi.com"
   proxy-server-nameserver:
-     - 8.8.8.8
+      - 8.8.8.8
   nameserver:
-     - 192.168.5.5:5336
+      - 202.103.224.68
+      - 202.103.225.68
+      - 240e:9:0:100:202:103:224:68
+      - 240e:9:2000:100:202:103:225:68
+      - 180.76.76.76
+      - 223.5.5.5
 # ========================
 # TUN 模块
 # ========================
 tun:
   enable: true
-  stack: mixed
+  stack: gvisor
   device: utun
-  dns-hijack: ["any:53", "tcp://any:53"]
   endpoint-independent-nat: true
   auto-route: false
   auto-detect-interface: false
@@ -96,54 +93,80 @@ proxy-groups:
     tolerance: 50
     use: 
          - ds 
-  # ===== 业务分流组 =====
+ # ===== 业务分流组 =====
+  - {name: Youtube, type: select, proxies: [美国节点, 直连]}
+  - {name: Telegram, type: select, proxies: [美国节点, 直连]}
+  - {name: cloudflare, type: select, proxies: [美国节点, 直连]}
+  - {name: Google, type: select, proxies: [美国节点, 直连]}
+  - {name: ChatGPT, type: select, proxies: [美国节点, 直连]}
+  - {name: github, type: select, proxies: [美国节点, 直连]}
+  - {name: WhatsApp, type: select, proxies: [美国节点, 直连]}
+  - {name: Twitter, type: select, proxies: [美国节点, 直连]}
+  - {name: Amazon, type: select, proxies: [美国节点, 直连]}
+  - {name: OKX, type: select, proxies: [美国节点, 直连]}
+  - {name: Bybit, type: select, proxies: [美国节点, 直连]}
+  - {name: Binance, type: select, proxies: [美国节点, 直连]}
+  - {name: TikTok, type: select, proxies: [美国节点, 直连]}
+  - {name: Netflix, type: select, proxies: [美国节点, 直连]}
+  - {name: Disney, type: select, proxies: [美国节点, 直连]}
+  - {name: HBO, type: select, proxies: [美国节点, 直连]}
+  - {name: Spotify, type: select, proxies: [美国节点, 直连]}
+  - {name: Epic, type: select, proxies: [美国节点, 直连]}
+  - {name: EA, type: select, proxies: [美国节点, 直连]}
+  - {name: Blizzard, type: select, proxies: [美国节点, 直连]}
+  - {name: ubisoft, type: select, proxies: [美国节点, 直连]}
+  - {name: playstation, type: select, proxies: [美国节点, 直连]}
+  - {name: nintend, type: select, proxies: [美国节点, 直连]}
+  - {name: Apple-CN, type: select, proxies: [美国节点, 直连]}
+  - {name: Perplexity, type: select, proxies: [美国节点, 直连]}
+  - {name: speedtest, type: select, proxies: [美国节点, 直连]}
   - {name: Steam, type: select, proxies: [直连, 美国节点]}
   - {name: Microsoft, type: select, proxies: [直连, 美国节点]}
-  - {name: 国内, type: select, proxies: [直连]}
-  - {name: 漏网之鱼,<<: *default} 
+  - {name: geolocation-!cn, type: select, proxies: [美国节点, 直连]}
+  - {name: 漏网之鱼, type: select, proxies: [美国节点, 直连]}
 # ========================
 # 规则引擎（rules）
 # ========================
-rules:      
-   - RULE-SET,Private_domain,国内    
-   - RULE-SET,Youtube_domain,美国节点    
-   - RULE-SET,Telegram_domain,美国节点
-   - RULE-SET,cloudflare_domain,美国节点                       
-   - RULE-SET,Google_domain,美国节点
-   - RULE-SET,ChatGPT_domain,美国节点
-   - RULE-SET,github_domain,美国节点          
-   - RULE-SET,WhatsApp_domain,美国节点
-   - RULE-SET,Twitter_domain,美国节点
-   - RULE-SET,Amazon_domain,美国节点
-   - RULE-SET,OKX_domain,美国节点
-   - RULE-SET,Bybit_domain,美国节点
-   - RULE-SET,Binance_domain,美国节点
-   - RULE-SET,TikTok_domain,美国节点
-   - RULE-SET,Netflix_domain,美国节点
-   - RULE-SET,Disney_domain,美国节点
-   - RULE-SET,HBO_domain,美国节点
-   - RULE-SET,Spotify_domain,美国节点
+rules: 
+   - RULE-SET,private_IP,直连,no-resolve
+   - RULE-SET,China_IP,直连,no-resolve
+   - RULE-SET,Private_domain,直连 
+   - RULE-SET,Youtube_domain,Youtube    
+   - RULE-SET,Telegram_domain,Telegram
+   - RULE-SET,cloudflare_domain,cloudflare                       
+   - RULE-SET,Google_domain,Google
+   - RULE-SET,ChatGPT_domain,ChatGPT
+   - RULE-SET,github_domain,github         
+   - RULE-SET,WhatsApp_domain,WhatsApp
+   - RULE-SET,Twitter_domain,Twitter
+   - RULE-SET,Amazon_domain,Amazon
+   - RULE-SET,OKX_domain,OKX
+   - RULE-SET,Bybit_domain,Bybit
+   - RULE-SET,Binance_domain,Binance
+   - RULE-SET,TikTok_domain,TikTok
+   - RULE-SET,Netflix_domain,Netflix
+   - RULE-SET,Disney_domain,Disney
+   - RULE-SET,HBO_domain,HBO
+   - RULE-SET,Spotify_domain,Spotify
    - RULE-SET,Steam_domain,Steam
    - RULE-SET,Steamcn_domain,Steam
-   - RULE-SET,Epic_domain,美国节点
-   - RULE-SET,EA_domain,美国节点
-   - RULE-SET,Blizzard_domain,美国节点
-   - RULE-SET,UBI_domain,美国节点
-   - RULE-SET,playstation_domain,美国节点
-   - RULE-SET,nintend_domain,美国节点
+   - RULE-SET,Epic_domain,Epic
+   - RULE-SET,EA_domain,EA
+   - RULE-SET,Blizzard_domain,Blizzard
+   - RULE-SET,ubisoft_domain,ubisoft
+   - RULE-SET,playstation_domain,playstation
+   - RULE-SET,nintend_domain,nintend
    - RULE-SET,Microsoft_domain,Microsoft
-   - RULE-SET,Apple-CN_domain,美国节点
-   - RULE-SET,Apple_domain,国内
-   - RULE-SET,Perplexity_domain,美国节点
-   - RULE-SET,speedtest_domain,美国节点
-   - RULE-SET,geolocation-!cn_domain,美国节点
-   - RULE-SET,China_domain,国内 
-   - RULE-SET,private_IP,国内,no-resolve 
-   - RULE-SET,China_IP,国内,no-resolve  
-   - RULE-SET,Google_IP,美国节点,no-resolve
-   - RULE-SET,Telegram_IP,美国节点,no-resolve
-   - RULE-SET,Netflix_IP,美国节点,no-resolve
-   - RULE-SET,cloudflare_IP,美国节点,no-resolve      
+   - RULE-SET,Apple-CN_domain,Apple-CN
+   - RULE-SET,Apple_domain,直连
+   - RULE-SET,Perplexity_domain,Perplexity
+   - RULE-SET,speedtest_domain,speedtest
+   - RULE-SET,geolocation-!cn_domain,geolocation-!cn  
+   - RULE-SET,China_domain,直连   
+   - RULE-SET,Google_IP,Google,no-resolve
+   - RULE-SET,Telegram_IP,Telegram,no-resolve
+   - RULE-SET,Netflix_IP,Netflix,no-resolve
+   - RULE-SET,cloudflare_IP,cloudflare,no-resolve      
    - MATCH,漏网之鱼
 # ========================
 # 规则集提供者
@@ -177,7 +200,7 @@ rule-providers:
   Epic_domain: {<<: *domain, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/epicgames.mrs"}
   EA_domain: {<<: *domain, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/ea.mrs"}
   Blizzard_domain: {<<: *domain, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/blizzard.mrs"}
-  UBI_domain: {<<: *domain, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/ubisoft.mrs"}
+  ubisoft_domain: {<<: *domain, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/ubisoft.mrs"}
   playstation_domain: {<<: *domain, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/playstation.mrs"}
   nintend_domain: {<<: *domain, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/nintendo.mrs"}
   geolocation-!cn_domain: {<<: *domain, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/geolocation-!cn.mrs"} 
@@ -192,29 +215,6 @@ rule-providers:
   Google_IP: {<<: *ip, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geoip/google.mrs"}
   China_IP: {<<: *ip, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geoip/cn.mrs"}
   cloudflare_IP: {<<: *ip, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/cloudflare.mrs"}
-  apple_ip: {<<: *ip, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo-lite/geoip/apple.mrs"}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
