@@ -12,6 +12,7 @@ proxies:
     skip-cert-verify: false
     obfs: salamander
     obfs-password: " "
+    client-fingerprint: chrome
   - {name: 直连, type: direct}
 # ========================
 # 域名嗅探
@@ -228,6 +229,7 @@ rule-providers:
   Google_IP: {<<: *ip, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geoip/google.mrs"}
   China_IP: {<<: *ip, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geoip/cn.mrs"}
   cloudflare_IP: {<<: *ip, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/cloudflare.mrs"}
+
 
 
 
