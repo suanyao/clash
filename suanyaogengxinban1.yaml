@@ -60,6 +60,9 @@ dns:
       - "+.lan"
       - "+.local"
       - "geosite:cn"
+      - "rule-set:China_domain"      
+      - "rule-set:Private_domain"    
+      - "rule-set:Apple-CN_domain"
       - "+.msftconnecttest.com"
       - "+.msftncsi.com"
       - "time.*.com"
@@ -131,7 +134,7 @@ proxy-groups:
   - {name: ubisoft, type: select, proxies: [美国节点, 直连]}
   - {name: playstation, type: select, proxies: [美国节点, 直连]}
   - {name: nintend, type: select, proxies: [美国节点, 直连]}
-  - {name: Apple-CN, type: select, proxies: [美国节点, 直连]}
+  - {name: Apple, type: select, proxies: [美国节点, 直连]}
   - {name: Perplexity, type: select, proxies: [美国节点, 直连]}
   - {name: speedtest, type: select, proxies: [美国节点, 直连]}
   - {name: Steam, type: select, proxies: [直连, 美国节点]}
@@ -171,8 +174,8 @@ rules:
    - RULE-SET,playstation_domain,playstation
    - RULE-SET,nintend_domain,nintend
    - RULE-SET,Microsoft_domain,Microsoft
-   - RULE-SET,Apple-CN_domain,Apple-CN
-   - RULE-SET,Apple_domain,直连
+   - RULE-SET,Apple-CN_domain,直连
+   - RULE-SET,Apple_domain,Apple
    - RULE-SET,Perplexity_domain,Perplexity
    - RULE-SET,speedtest_domain,speedtest
    - RULE-SET,geolocation-!cn_domain,geolocation-!cn  
@@ -229,6 +232,7 @@ rule-providers:
   Google_IP: {<<: *ip, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geoip/google.mrs"}
   China_IP: {<<: *ip, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geoip/cn.mrs"}
   cloudflare_IP: {<<: *ip, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/cloudflare.mrs"}
+
 
 
 
