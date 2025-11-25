@@ -54,8 +54,7 @@ dns:
   fake-ip-range: 198.20.0.1/16  
   respect-rules: true
   prefetch: true
-  cache-algorithm: none
-  cache-size: 0
+  cache-algorithm: arc
   fake-ip-filter-mode: blacklist
   fake-ip-filter:             
       - "+.lan"
@@ -71,7 +70,12 @@ dns:
   proxy-server-nameserver:
       - 8.8.8.8
   nameserver:
-      - 192.168.5.5:5336
+      - 202.103.224.68
+      - 202.103.225.68
+      - 240e:9:0:100:202:103:224:68
+      - 240e:9:2000:100:202:103:225:68
+      - 180.76.76.76
+      - 223.5.5.5
 # ========================
 # TUN 模块
 # ========================
@@ -230,6 +234,7 @@ rule-providers:
   Google_IP: {<<: *ip, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geoip/google.mrs"}
   China_IP: {<<: *ip, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geoip/cn.mrs"}
   cloudflare_IP: {<<: *ip, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/cloudflare.mrs"}
+
 
 
 
