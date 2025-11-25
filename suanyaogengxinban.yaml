@@ -81,7 +81,7 @@ dns:
 # ========================
 tun:
   enable: true
-  stack: gvisor
+  stack: mixed
   device: utun
   endpoint-independent-nat: true
   auto-route: false
@@ -234,6 +234,7 @@ rule-providers:
   Google_IP: {<<: *ip, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geoip/google.mrs"}
   China_IP: {<<: *ip, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geoip/cn.mrs"}
   cloudflare_IP: {<<: *ip, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/cloudflare.mrs"}
+
 
 
 
