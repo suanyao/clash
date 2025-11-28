@@ -62,10 +62,8 @@ dns:
   fake-ip-filter:             
       - "+.lan"
       - "+.local"
-      - "geosite:cn"
-      - "rule-set:China_domain"      
+      - "geosite:cn"      
       - "rule-set:Private_domain"    
-      - "rule-set:Apple-CN_domain"
       - "+.msftconnecttest.com"
       - "+.msftncsi.com"
       - "time.*.com"
@@ -75,8 +73,6 @@ dns:
   nameserver:
       - 202.103.224.68
       - 202.103.225.68
-      - 240e:9:0:100:202:103:224:68
-      - 240e:9:2000:100:202:103:225:68
       - 180.76.76.76
       - 223.5.5.5
 # ========================
@@ -235,6 +231,7 @@ rule-providers:
   Google_IP: {<<: *ip, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geoip/google.mrs"}
   China_IP: {<<: *ip, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geoip/cn.mrs"}
   cloudflare_IP: {<<: *ip, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/cloudflare.mrs"}
+
 
 
 
