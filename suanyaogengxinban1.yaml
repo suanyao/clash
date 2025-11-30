@@ -61,10 +61,11 @@ dns:
   cache-size: 0
   fake-ip-filter-mode: blacklist
   fake-ip-filter:             
-      - "+.lan"
+       - "+.lan"
       - "+.local"
-      - "geosite:cn"      
+      - "rule-set:China_domain" 
       - "rule-set:Private_domain"    
+      - "rule-set:Direct_domain"    
       - "+.msftconnecttest.com"
       - "+.msftncsi.com"
       - "time.*.com"
@@ -78,7 +79,7 @@ dns:
 # ========================
 tun:
   enable: true
-  stack: gvisor
+  stack: mixed
   device: utun
   endpoint-independent-nat: true
   auto-route: false
@@ -142,9 +143,9 @@ proxy-groups:
 # 规则引擎（rules）
 # ========================
 rules: 
-   - RULE-SET,private_IP,直连,no-resolve
-   - RULE-SET,China_IP,直连,no-resolve
    - RULE-SET,Private_domain,直连 
+   - RULE-SET,Direct_domain,直连
+   - RULE-SET,Apple-CN_domain,直连
    - RULE-SET,Youtube_domain,Youtube    
    - RULE-SET,Telegram_domain,Telegram
    - RULE-SET,cloudflare_domain,cloudflare                       
@@ -171,7 +172,6 @@ rules:
    - RULE-SET,playstation_domain,playstation
    - RULE-SET,nintend_domain,nintend
    - RULE-SET,Microsoft_domain,Microsoft
-   - RULE-SET,Apple-CN_domain,直连
    - RULE-SET,Apple_domain,Apple
    - RULE-SET,Perplexity_domain,Perplexity
    - RULE-SET,speedtest_domain,speedtest
@@ -180,7 +180,9 @@ rules:
    - RULE-SET,Google_IP,Google,no-resolve
    - RULE-SET,Telegram_IP,Telegram,no-resolve
    - RULE-SET,Netflix_IP,Netflix,no-resolve
-   - RULE-SET,cloudflare_IP,cloudflare,no-resolve      
+   - RULE-SET,cloudflare_IP,cloudflare,no-resolve   
+   - RULE-SET,private_IP,直连,no-resolve
+   - RULE-SET,China_IP,直连,no-resolve   
    - MATCH,漏网之鱼
 # ========================
 # 规则集提供者
@@ -192,6 +194,7 @@ rule-anchor:
 rule-providers:
   speedtest_domain: {<<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/ookla-speedtest.mrs"}
   ChatGPT_domain: {<<: *domain, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/category-ai-!cn.mrs"}
+  Direct_domain: {<<: *domain, url: "https://github.com/666OS/rules/raw/release/mihomo/domain/Direct.mrs"}
   Perplexity_domain: {<<: *domain, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/perplexity.mrs"}
   github_domain: {<<: *domain, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/github.mrs"}
   Telegram_domain: {<<: *domain, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/telegram.mrs"}  
@@ -229,6 +232,7 @@ rule-providers:
   Google_IP: {<<: *ip, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geoip/google.mrs"}
   China_IP: {<<: *ip, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geoip/cn.mrs"}
   cloudflare_IP: {<<: *ip, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/cloudflare.mrs"}
+
 
 
 
