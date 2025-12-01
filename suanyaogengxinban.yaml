@@ -115,12 +115,12 @@ proxy-groups:
   - {name: Telegram, type: select, proxies: [美国节点, 直连]}
   - {name: cloudflare, type: select, proxies: [美国节点, 直连]}
   - {name: Google, type: select, proxies: [美国节点, 直连]}
-  - {name: ChatGPT, type: select, proxies: [美国节点, 直连]}
+  - {name: AI, type: select, proxies: [美国节点, 直连]}
+  - {name: category, type: select, proxies: [美国节点, 直连]}
   - {name: github, type: select, proxies: [美国节点, 直连]}
   - {name: WhatsApp, type: select, proxies: [美国节点, 直连]}
   - {name: Twitter, type: select, proxies: [美国节点, 直连]}
   - {name: Amazon, type: select, proxies: [美国节点, 直连]}
-  - {name: OKX, type: select, proxies: [美国节点, 直连]}
   - {name: Bybit, type: select, proxies: [美国节点, 直连]}
   - {name: Binance, type: select, proxies: [美国节点, 直连]}
   - {name: TikTok, type: select, proxies: [美国节点, 直连]}
@@ -152,13 +152,13 @@ rules:
    - RULE-SET,Telegram_domain,Telegram
    - RULE-SET,cloudflare_domain,cloudflare                       
    - RULE-SET,Google_domain,Google
-   - RULE-SET,ChatGPT_domain,ChatGPT
+   - RULE-SET,AI_domain,AI
    - RULE-SET,github_domain,github         
    - RULE-SET,WhatsApp_domain,WhatsApp
    - RULE-SET,Twitter_domain,Twitter
    - RULE-SET,Amazon_domain,Amazon
-   - RULE-SET,OKX_domain,OKX
    - RULE-SET,Bybit_domain,Bybit
+   - RULE-SET,category_domain,category
    - RULE-SET,Binance_domain,Binance
    - RULE-SET,TikTok_domain,TikTok
    - RULE-SET,Netflix_domain,Netflix
@@ -182,7 +182,9 @@ rules:
    - RULE-SET,Google_IP,Google,no-resolve
    - RULE-SET,Telegram_IP,Telegram,no-resolve
    - RULE-SET,Netflix_IP,Netflix,no-resolve
-   - RULE-SET,cloudflare_IP,cloudflare,no-resolve   
+   - RULE-SET,cloudflare_IP,cloudflare,no-resolve
+   - RULE-SET,AI_IP,AI,no-resolve   
+   - RULE-SET,Apple_IP,Apple,no-resolve 
    - RULE-SET,private_IP,直连,no-resolve
    - RULE-SET,China_IP,直连,no-resolve   
    - MATCH,漏网之鱼
@@ -195,7 +197,8 @@ rule-anchor:
   class: &class {type: http, interval: 86400, behavior: classical, format: text}  
 rule-providers:
   speedtest_domain: {<<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/ookla-speedtest.mrs"}
-  ChatGPT_domain: {<<: *domain, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/category-ai-!cn.mrs"}
+  AI_domain: {<<: *domain, url: "https://github.com/666OS/rules/raw/release/mihomo/domain/AI.mrs"}
+  category_domain: {<<: *domain, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/category-cryptocurrency.mrs"}
   Direct_domain: {<<: *domain, url: "https://github.com/666OS/rules/raw/release/mihomo/domain/Direct.mrs"}
   Perplexity_domain: {<<: *domain, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/perplexity.mrs"}
   github_domain: {<<: *domain, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/github.mrs"}
@@ -206,7 +209,6 @@ rule-providers:
   Apple-CN_domain: {<<: *domain, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/apple-cn.mrs"}
   Apple_domain: {<<: *domain, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/apple.mrs"} 
   Microsoft_domain: {<<: *domain, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/microsoft.mrs"}
-  OKX_domain: {<<: *domain, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/okx.mrs"}
   Bybit_domain: {<<: *domain, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/bybit.mrs"}
   Binance_domain: {<<: *domain, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/binance.mrs"}
   TikTok_domain: {<<: *domain, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/tiktok.mrs"}
@@ -233,6 +235,8 @@ rule-providers:
   Telegram_IP: {<<: *ip, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geoip/telegram.mrs"}
   Google_IP: {<<: *ip, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geoip/google.mrs"}
   China_IP: {<<: *ip, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geoip/cn.mrs"}
+  Apple_IP: {<<: *ip, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo-lite/geoip/apple.mrs"}
+  AI_IP: {<<: *ip, url: "https://github.com/666OS/rules/raw/release/mihomo/ip/AI.mrs"}
   cloudflare_IP: {<<: *ip, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/cloudflare.mrs"}
 
 
