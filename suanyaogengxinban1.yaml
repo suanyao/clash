@@ -17,22 +17,6 @@ proxies:
       - h3
   - {name: 直连, type: direct}
 # ========================
-# 域名嗅探
-# ========================
-sniffer:
-  enable: true
-  override-destination: true 
-  force-dns-mapping: true 
-  parse-pure-ip: true
-  sniff:
-    QUIC: {ports: [443, 8443]}
-    TLS: {ports: [443, 8443]}
-    HTTP: {ports: [80, 8080-8880], override-destination: true}
-  skip-domain:                
-    - "Mijia Cloud"
-    - "+.push.apple.com"
-    - "+.apple.com"
-# ========================
 # 主要端口设置
 # ========================
 port: 7890
@@ -60,7 +44,7 @@ dns:
   cache-algorithm: arc
   fake-ip-filter-mode: blacklist
   fake-ip-filter:             
-       - "+.lan"
+      - "+.lan"
       - "+.local"
       - "rule-set:China_domain" 
       - "rule-set:Private_domain"    
@@ -69,6 +53,9 @@ dns:
       - "+.msftncsi.com"
       - "time.*.com"
       - "+.market.xiaomi.com"
+  default-nameserver:
+      - 223.5.5.5
+      - 119.29.29.29   
   proxy-server-nameserver:
       - 8.8.8.8
   nameserver:
@@ -238,6 +225,7 @@ rule-providers:
   Apple_IP: {<<: *ip, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo-lite/geoip/apple.mrs"}
   AI_IP: {<<: *ip, url: "https://github.com/666OS/rules/raw/release/mihomo/ip/AI.mrs"}
   cloudflare_IP: {<<: *ip, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/cloudflare.mrs"}
+
 
 
 
