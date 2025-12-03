@@ -28,6 +28,9 @@ allow-lan: true
 ipv6: true
 mode: rule
 log-level: warning
+domain-matcher: "trie"
+domain-strategy: prefer_ipv4
+tcp-concurrent: true
 unified-delay: true                    
 find-process-mode: 'off'      
 # ========================
@@ -38,10 +41,11 @@ dns:
   listen: 0.0.0.0:7874
   ipv6: true
   enhanced-mode: fake-ip
-  fake-ip-range: 198.20.0.1/16  
-  use-hosts: false
+  fake-ip-range: 198.20.0.1/16
+  use-hosts: false  
   respect-rules: true
   prefetch: true
+  prefetch-domain: true
   cache-algorithm: arc
   fake-ip-filter-mode: blacklist
   fake-ip-filter:             
@@ -58,7 +62,7 @@ dns:
       - "rule-set:China_domain"      
   default-nameserver:
       - 223.5.5.5
-      - 119.29.29.29   
+      - 119.29.29.29
   proxy-server-nameserver:
       - 8.8.8.8
   nameserver:
@@ -83,7 +87,7 @@ tun:
 # ========================
 experimental:
   quic-go-disable-gso: true
-  
+  ignore-resolve-fail: true
 profile:
   store-selected: true
   store-fake-ip: true
@@ -228,6 +232,7 @@ rule-providers:
   Apple_IP: {<<: *ip, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo-lite/geoip/apple.mrs"}
   AI_IP: {<<: *ip, url: "https://github.com/666OS/rules/raw/release/mihomo/ip/AI.mrs"}
   cloudflare_IP: {<<: *ip, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/cloudflare.mrs"}
+
 
 
 
