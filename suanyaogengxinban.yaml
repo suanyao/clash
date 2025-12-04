@@ -43,21 +43,23 @@ dns:
   use-hosts: false  
   prefetch: true
   prefetch-domain: true
-  cache: false
+  cache: true
   fake-ip-filter-mode: blacklist
   fake-ip-filter:             
-      - "nas.local"
-      - "printer.local"
-      - "+.msftconnecttest.com"
-      - "+.msftncsi.com"
-      - "+.market.xiaomi.com"
-      - "+.lan"
-      - "+.local"
-      - "+.home.arpa"
+      - rule-set:Direct_domain
+      - rule-set:Private_domain
+      - rule-set:China_domain
+      - +.miwifi.com
+      - +.docker.io
+      - +.market.xiaomi.com
+      - +.push.apple.com
   proxy-server-nameserver:
       - 8.8.8.8
   nameserver:
-      - 192.168.5.5:5336
+      - 240e:9:0:100:202:103:224:68
+      - 202.103.224.68
+      - 202.103.225.68
+      - 240e:9:2000:100:202:103:225:68
 # ========================
 # TUN 模块
 # ========================
@@ -66,7 +68,8 @@ tun:
   stack: mixed
   device: utun
   dns-hijack:
-    - 0.0.0.0:53
+     - "any:53"
+     - "tcp://any:53"
   endpoint-independent-nat: true
   auto-route: false
   auto-detect-interface: false
@@ -224,6 +227,7 @@ rule-providers:
   Apple_IP: {<<: *ip, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo-lite/geoip/apple.mrs"}
   AI_IP: {<<: *ip, url: "https://github.com/666OS/rules/raw/release/mihomo/ip/AI.mrs"}
   cloudflare_IP: {<<: *ip, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/cloudflare.mrs"}
+
 
 
 
