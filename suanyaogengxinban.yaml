@@ -49,8 +49,6 @@ dns:
       - rule-set:Direct_domain
       - rule-set:Private_domain
       - rule-set:China_domain
-      - +.miwifi.com
-      - +.docker.io
       - +.market.xiaomi.com
       - +.push.apple.com
   proxy-server-nameserver:
@@ -227,6 +225,7 @@ rule-providers:
   Apple_IP: {<<: *ip, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo-lite/geoip/apple.mrs"}
   AI_IP: {<<: *ip, url: "https://github.com/666OS/rules/raw/release/mihomo/ip/AI.mrs"}
   cloudflare_IP: {<<: *ip, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/cloudflare.mrs"}
+
 
 
 
