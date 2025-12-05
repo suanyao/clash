@@ -17,6 +17,14 @@ proxies:
       - h3
   - {name: 直连, type: direct}
 # ========================
+# 流量嗅探
+# ========================
+sniffer:
+  enable: true                                                                         
+  override-destination: false                                                          
+  force-dns-mapping: true                                                             
+  parse-pure-ip: true       
+# ========================
 # 主要端口设置
 # ========================
 port: 7890
@@ -53,9 +61,10 @@ dns:
       - rule-set:Private_domain
       - rule-set:China_domain
       - +.market.xiaomi.com
-      - +.push.apple.com
+  default-nameserver:
+      - 223.5.5.5
   proxy-server-nameserver:
-      - 8.8.8.8
+      - https://dns.alidns.com/dns-query
   nameserver:
       - 240e:9:0:100:202:103:224:68
       - 202.103.224.68
@@ -226,6 +235,7 @@ rule-providers:
   Apple_IP: {<<: *ip, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo-lite/geoip/apple.mrs"}
   AI_IP: {<<: *ip, url: "https://github.com/666OS/rules/raw/release/mihomo/ip/AI.mrs"}
   cloudflare_IP: {<<: *ip, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/cloudflare.mrs"}
+
 
 
 
