@@ -51,7 +51,7 @@ dns:
   respect-rules: true
   prefetch: false
   prefetch-domain: false
-  cache: true
+  cache: false
   fake-ip-filter-mode: blacklist
   fake-ip-filter:             
       - rule-set:Direct_domain
@@ -64,7 +64,7 @@ dns:
       - 240e:9:0:100:202:103:224:68
       - 240e:9:2000:100:202:103:225:68
   proxy-server-nameserver:
-      - 8.8.8.8
+      - https://dns.alidns.com/dns-query
   default-nameserver:
       - 223.5.5.5
 # ========================
@@ -234,6 +234,7 @@ rule-providers:
   Apple_IP: {<<: *ip, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo-lite/geoip/apple.mrs"}
   AI_IP: {<<: *ip, url: "https://github.com/666OS/rules/raw/release/mihomo/ip/AI.mrs"}
   cloudflare_IP: {<<: *ip, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/cloudflare.mrs"}
+
 
 
 
