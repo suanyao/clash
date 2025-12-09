@@ -51,20 +51,22 @@ dns:
   fake-ip-range: 198.20.0.1/16
   use-hosts: false  
   respect-rules: true
-  prefetch: false
-  prefetch-domain: false
-  cache: false
+  prefetch: true
+  prefetch-domain: true
+  cache: true
   fake-ip-filter-mode: blacklist
   fake-ip-filter:             
       - rule-set:Direct_domain
       - rule-set:Private_domain
       - rule-set:China_domain
       - +.market.xiaomi.com
+      - "+.msftconnecttest.com"                                                         
+      - "+.msftncsi.com"                                                                
+      - "time.*.com"  
   nameserver:
       - 202.103.224.68
       - 202.103.225.68
       - 240e:9:0:100:202:103:224:68
-      - 240e:9:2000:100:202:103:225:68
   proxy-server-nameserver:
       - https://dns.alidns.com/dns-query
 # ========================
@@ -232,6 +234,7 @@ rule-providers:
   Apple_IP: {<<: *ip, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo-lite/geoip/apple.mrs"}
   AI_IP: {<<: *ip, url: "https://github.com/666OS/rules/raw/release/mihomo/ip/AI.mrs"}
   cloudflare_IP: {<<: *ip, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/cloudflare.mrs"}
+
 
 
 
