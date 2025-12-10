@@ -56,7 +56,6 @@ dns:
   fake-ip-filter:             
       - rule-set:Direct_domain
       - rule-set:Private_domain
-      - rule-set:China_domain
       - +.market.xiaomi.com   
       - "+.msftconnecttest.com"                                                         
       - "+.msftncsi.com"                                                                
@@ -234,6 +233,7 @@ rule-providers:
   Apple_IP: {<<: *ip, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo-lite/geoip/apple.mrs"}
   AI_IP: {<<: *ip, url: "https://github.com/666OS/rules/raw/release/mihomo/ip/AI.mrs"}
   cloudflare_IP: {<<: *ip, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/cloudflare.mrs"}
+
 
 
 
