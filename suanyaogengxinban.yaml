@@ -49,16 +49,17 @@ dns:
   enhanced-mode: fake-ip
   fake-ip-range: 198.20.0.1/16 
   respect-rules: true
+  use-hosts: false
   fake-ip-filter-mode: blacklist
   fake-ip-filter:  
-    - rule-set:Private_domain
-  default-nameserver:
-    - https://223.5.5.5/dns-query  
+    - rule-set:Private_domain  
   proxy-server-nameserver:
     - https://dns.alidns.com/dns-query
   nameserver:
     - 202.103.224.68
     - 202.103.225.68
+    - 240e:9:0:100:202:103:224:68
+    - 240e:9:2000:100:202:103:225:68
 # ========================
 # TUN 模块
 # ========================
@@ -224,6 +225,7 @@ rule-providers:
   Apple_IP: {<<: *ip, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo-lite/geoip/apple.mrs"}
   AI_IP: {<<: *ip, url: "https://github.com/666OS/rules/raw/release/mihomo/ip/AI.mrs"}
   cloudflare_IP: {<<: *ip, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/cloudflare.mrs"}
+
 
 
 
