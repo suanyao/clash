@@ -49,23 +49,18 @@ dns:
   ipv6: true
   enhanced-mode: fake-ip
   fake-ip-range: 198.20.0.1/16
-  use-hosts: false  
   respect-rules: true
-  cache: true
   fake-ip-filter-mode: blacklist
-  fake-ip-filter:             
-      - rule-set:Direct_domain
-      - rule-set:Private_domain
-      - +.market.xiaomi.com
-      - "+.msftconnecttest.com"                                                         
-      - "+.msftncsi.com"                                                                
-      - "time.*.com"  
-  nameserver:
-      - 202.103.224.68
-      - 202.103.225.68
-      - 240e:9:0:100:202:103:224:68
+  fake-ip-filter:  
+    - rule-set:fakeipfilter_domain
+  default-nameserver:
+    - https://223.5.5.5/dns-query  
   proxy-server-nameserver:
-      - https://dns.alidns.com/dns-query
+    - https://dns.alidns.com/dns-query#h3=true
+    - https://doh.pub/dns-query#h3=true
+  nameserver:
+    - https://dns.alidns.com/dns-query
+    - https://doh.pub/dns-query
 # ========================
 # TUN 模块
 # ========================
@@ -139,7 +134,6 @@ proxy-groups:
 # ========================
 rules: 
    - RULE-SET,Private_domain,直连 
-   - RULE-SET,Direct_domain,直连
    - RULE-SET,Apple-CN_domain,直连
    - RULE-SET,Youtube_domain,Youtube    
    - RULE-SET,Telegram_domain,Telegram
@@ -189,10 +183,10 @@ rule-anchor:
   domain: &domain {type: http, interval: 86400, behavior: domain, format: mrs}
   class: &class {type: http, interval: 86400, behavior: classical, format: text}  
 rule-providers:
+  fakeipfilter_domain: {<<: *domain, url: "https://raw.githubusercontent.com/wwqgtxx/clash-rules/release/fakeip-filter.mrs"}
   speedtest_domain: {<<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/ookla-speedtest.mrs"}
   AI_domain: {<<: *domain, url: "https://github.com/666OS/rules/raw/release/mihomo/domain/AI.mrs"}
   category_domain: {<<: *domain, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/category-cryptocurrency.mrs"}
-  Direct_domain: {<<: *domain, url: "https://github.com/666OS/rules/raw/release/mihomo/domain/Direct.mrs"}
   Perplexity_domain: {<<: *domain, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/perplexity.mrs"}
   github_domain: {<<: *domain, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/github.mrs"}
   Telegram_domain: {<<: *domain, url: "https://github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/telegram.mrs"}  
@@ -231,6 +225,7 @@ rule-providers:
   Apple_IP: {<<: *ip, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo-lite/geoip/apple.mrs"}
   AI_IP: {<<: *ip, url: "https://github.com/666OS/rules/raw/release/mihomo/ip/AI.mrs"}
   cloudflare_IP: {<<: *ip, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/cloudflare.mrs"}
+
 
 
 
