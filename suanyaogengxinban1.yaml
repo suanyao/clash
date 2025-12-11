@@ -82,7 +82,6 @@ tun:
 # ========================
 experimental:
   quic-go-disable-gso: true
-  ignore-resolve-fail: true
 profile:
   store-selected: true
   store-fake-ip: true
@@ -225,6 +224,7 @@ rule-providers:
   Apple_IP: {<<: *ip, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo-lite/geoip/apple.mrs"}
   AI_IP: {<<: *ip, url: "https://github.com/666OS/rules/raw/release/mihomo/ip/AI.mrs"}
   cloudflare_IP: {<<: *ip, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/cloudflare.mrs"}
+
 
 
 
