@@ -36,6 +36,7 @@ allow-lan: true
 ipv6: true
 mode: rule
 log-level: warning
+bind-address: '*'
 domain-matcher: "mph"
 tcp-concurrent: true
 unified-delay: true                    
@@ -224,6 +225,7 @@ rule-providers:
   Apple_IP: {<<: *ip, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo-lite/geoip/apple.mrs"}
   AI_IP: {<<: *ip, url: "https://github.com/666OS/rules/raw/release/mihomo/ip/AI.mrs"}
   cloudflare_IP: {<<: *ip, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/cloudflare.mrs"}
+
 
 
 
