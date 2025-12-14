@@ -33,7 +33,7 @@ redir-port: 7892
 mixed-port: 7893
 tproxy-port: 7895
 allow-lan: true
-ipv6: true
+ipv6: false
 mode: rule
 log-level: warning
 bind-address: '*'
@@ -48,7 +48,7 @@ dns:
   enable: true
   cache-algorithm: arc
   listen: 0.0.0.0:7874
-  ipv6: true
+  ipv6: false
   enhanced-mode: fake-ip
   fake-ip-range: 198.20.0.1/16
   use-hosts: false
@@ -56,13 +56,12 @@ dns:
   fake-ip-filter:  
     - rule-set:Private_domain  
     - rule-set:China_domain
+    - rule-set:Apple-CN_domain
   proxy-server-nameserver:
     - https://dns.alidns.com/dns-query
   nameserver:
     - 202.103.224.68
     - 202.103.225.68
-    - 240e:9:0:100:202:103:224:68
-    - 240e:9:2000:100:202:103:225:68
 # ========================
 # TUN 模块
 # ========================
@@ -225,6 +224,7 @@ rule-providers:
   Apple_IP: {<<: *ip, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo-lite/geoip/apple.mrs"}
   AI_IP: {<<: *ip, url: "https://github.com/666OS/rules/raw/release/mihomo/ip/AI.mrs"}
   cloudflare_IP: {<<: *ip, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/cloudflare.mrs"}
+
 
 
 
