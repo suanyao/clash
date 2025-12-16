@@ -17,14 +17,6 @@ proxies:
       - h3
   - {name: 直连, type: direct}
 # ========================
-# 流量嗅探
-# ========================
-sniffer:
-  enable: true                                                                         
-  override-destination: false                                                          
-  force-dns-mapping: true                                                             
-  parse-pure-ip: true       
-# ========================
 # 主要端口设置
 # ========================
 port: 7890
@@ -46,9 +38,8 @@ find-process-mode: 'off'
 # ========================
 dns:
   enable: true
-  cache-algorithm: arc
-  cache-size: 4096         
-  cache-time: 1800 
+  cache-size: 0        
+  cache-time: 0 
   listen: 0.0.0.0:7874
   ipv6: false
   enhanced-mode: fake-ip
@@ -227,6 +218,7 @@ rule-providers:
   Apple_IP: {<<: *ip, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo-lite/geoip/apple.mrs"}
   AI_IP: {<<: *ip, url: "https://github.com/666OS/rules/raw/release/mihomo/ip/AI.mrs"}
   cloudflare_IP: {<<: *ip, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/cloudflare.mrs"}
+
 
 
 
