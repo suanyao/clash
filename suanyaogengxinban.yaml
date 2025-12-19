@@ -17,11 +17,8 @@ proxies:
 # ========================
 # 主要端口设置
 # ========================
-port: 7890
-socks-port: 7891
 redir-port: 7892
 mixed-port: 7893
-tproxy-port: 7895
 allow-lan: true
 ipv6: false
 mode: rule
@@ -50,7 +47,7 @@ dns:
     - "rule-set:China_domain"
     - "rule-set:Apple-CN_domain"
   proxy-server-nameserver:
-    - 119.29.29.29
+    - 8.8.8.8
   nameserver:
     - 202.103.224.68
     - 202.103.225.68
@@ -147,7 +144,7 @@ rules:
    - RULE-SET,HBO_domain,HBO
    - RULE-SET,Spotify_domain,Spotify
    - RULE-SET,Steam_domain,Steam
-   - RULE-SET,Steamcn_domain,Steam
+   - RULE-SET,Steamcn_domain,直连
    - RULE-SET,Epic_domain,Epic
    - RULE-SET,EA_domain,EA
    - RULE-SET,Blizzard_domain,Blizzard
@@ -218,6 +215,7 @@ rule-providers:
   Apple_IP: {<<: *ip, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo-lite/geoip/apple.mrs"}
   AI_IP: {<<: *ip, url: "https://github.com/666OS/rules/raw/release/mihomo/ip/AI.mrs"}
   cloudflare_IP: {<<: *ip, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/cloudflare.mrs"}
+
 
 
 
