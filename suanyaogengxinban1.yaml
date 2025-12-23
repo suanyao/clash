@@ -50,8 +50,8 @@ dns:
     - "rule-set:Apple-CN_domain"
     - "hui.suanyao.top"
   proxy-server-nameserver:
+    - 202.103.224.68
     - 223.5.5.5
-    - 119.29.29.29
   nameserver:
     - 202.103.224.68
     - 202.103.225.68
@@ -217,6 +217,7 @@ rule-providers:
   Apple_IP: {<<: *ip, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo-lite/geoip/apple.mrs"}
   AI_IP: {<<: *ip, url: "https://github.com/666OS/rules/raw/release/mihomo/ip/AI.mrs"}
   cloudflare_IP: {<<: *ip, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/cloudflare.mrs"}
+
 
 
 
