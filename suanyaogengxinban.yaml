@@ -47,6 +47,7 @@ dns:
     - "rule-set:Private_domain"
     - "rule-set:China_domain"
     - "rule-set:Apple-CN_domain"
+    - "rule-set:Steamcn_domain"
     - "hui.suanyao.top"
   proxy-server-nameserver:
     - https://dns.alidns.com/dns-query
@@ -146,8 +147,8 @@ rules:
    - RULE-SET,Disney_domain,Disney
    - RULE-SET,HBO_domain,HBO
    - RULE-SET,Spotify_domain,Spotify
-   - RULE-SET,Steam_domain,Steam
    - RULE-SET,Steamcn_domain,直连
+   - RULE-SET,Steam_domain,Steam
    - RULE-SET,Epic_domain,Epic
    - RULE-SET,EA_domain,EA
    - RULE-SET,Blizzard_domain,Blizzard
@@ -218,6 +219,7 @@ rule-providers:
   Apple_IP: {<<: *ip, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo-lite/geoip/apple.mrs"}
   AI_IP: {<<: *ip, url: "https://github.com/666OS/rules/raw/release/mihomo/ip/AI.mrs"}
   cloudflare_IP: {<<: *ip, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/cloudflare.mrs"}
+
 
 
 
