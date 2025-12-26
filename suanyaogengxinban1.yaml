@@ -19,8 +19,10 @@ proxies:
 # ========================
 # 主要端口设置
 # ========================
-redir-port: 7892
+port: 7890                                                                          
+socks-port: 7891     
 mixed-port: 7893
+redir-port: 7892
 tproxy-port: 7895
 allow-lan: true
 ipv6: false
@@ -219,6 +221,7 @@ rule-providers:
   Apple_IP: {<<: *ip, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo-lite/geoip/apple.mrs"}
   AI_IP: {<<: *ip, url: "https://github.com/666OS/rules/raw/release/mihomo/ip/AI.mrs"}
   cloudflare_IP: {<<: *ip, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/cloudflare.mrs"}
+
 
 
 
