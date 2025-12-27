@@ -2,17 +2,19 @@
 # ========================
 # Clash 配置文件
 # ========================
-proxy-providers:
-  ds:
-    url: "http://192.168.5.5:3010/T3B9dgzBzdRbBF8ASb1E/download/DC3?target=ClashMeta"
-    输入: http
-    interval: 86400
-    health-check:
-      enable: true
-      url: https://www.gstatic.com/generate_204
-      interval: 300
-      proxy: "直连"
 proxies:
+  - type: hysteria2
+    name: "🇺🇸 h2"
+    server: 
+    port: 443
+    password: " "
+    sni: " "
+    skip-cert-verify: false
+    obfs: salamander
+    obfs-password: " "
+    client-fingerprint: chrome
+    alpn: 
+      - h3
   - {name: 直连, type: direct}
 # ========================
 # 主要端口设置
@@ -37,11 +39,11 @@ find-process-mode: 'off'
 dns:
   enable: true
   cache-size: 0        
-  cache-time: 0
+  cache-time: 0 
   listen: 0.0.0.0:7874
   ipv6: false
   enhanced-mode: fake-ip
-  fake-ip-range: 198.18.0.1/16 
+  fake-ip-range: 198.18.0.1/16
   use-hosts: false
   use-system-hosts: false
   fake-ip-filter-mode: blacklist
@@ -67,7 +69,7 @@ tun:
   stack: mixed
   device: utun
   dns-hijack:
-     - "127.0.0.1:53"
+    - "127.0.0.1:53"
   endpoint-independent-nat: true
   auto-route: false
   auto-detect-interface: false
@@ -85,18 +87,16 @@ profile:
 # 策略组定义
 # ========================
 default: &default
-  输入: select
+  type: select
   proxies:
-   - 直连
-   - 美国节点    
+    - 直连
+    - 美国节点       
 proxy-groups:
   - name: 美国节点
-    输入: url-test
-    interval: 300
-    tolerance: 50
-    use: 
-         - ds 
- # ===== 业务分流组 =====
+    type: select
+    proxies: 
+         - "🇺🇸 h2" 
+  # ===== 业务分流组 =====
   - {name: Youtube, type: select, proxies: [美国节点, 直连]}
   - {name: Telegram, type: select, proxies: [美国节点, 直连]}
   - {name: cloudflare, type: select, proxies: [美国节点, 直连]}
@@ -121,7 +121,7 @@ proxy-groups:
   - {name: playstation, type: select, proxies: [美国节点, 直连]}
   - {name: nintend, type: select, proxies: [美国节点, 直连]}
   - {name: Apple, type: select, proxies: [美国节点, 直连]}
-  - {name: Perplexity, type: select, proxies: [美国节点, 直连]}
+  - {name: Perplexity， type: select, proxies: [美国节点, 直连]}
   - {name: speedtest, type: select, proxies: [美国节点, 直连]}
   - {name: Steam, type: select, proxies: [直连, 美国节点]}
   - {name: Microsoft, type: select, proxies: [直连, 美国节点]}
@@ -222,6 +222,16 @@ rule-providers:
   Apple_IP: {<<: *ip, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo-lite/geoip/apple.mrs"}
   AI_IP: {<<: *ip, url: "https://github.com/666OS/rules/raw/release/mihomo/ip/AI.mrs"}
   cloudflare_IP: {<<: *ip, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/cloudflare.mrs"}
+
+
+
+
+
+
+
+
+
+
 
 
 
