@@ -86,14 +86,14 @@ profile:
 # ========================
 # 策略组定义
 # ========================
-default: &default
-  type: select
+默认: &default
+  输入: select
   proxies:
     - 直连
     - 美国节点       
 proxy-groups:
   - name: 美国节点
-    type: select
+    输入: select
     proxies: 
          - "🇺🇸 h2" 
   # ===== 业务分流组 =====
@@ -132,25 +132,27 @@ proxy-groups:
 # ========================
 rules: 
    - RULE-SET,Private_domain,直连 
+   - RULE-SET,private_IP,直连,no-resolve
    - RULE-SET,Apple-CN_domain,直连
-   - RULE-SET,Youtube_domain,Youtube    
-   - RULE-SET,Telegram_domain,Telegram
-   - RULE-SET,cloudflare_domain,cloudflare                       
-   - RULE-SET,Google_domain,Google
+   - RULE-SET,Steamcn_domain,直连
    - RULE-SET,AI_domain,AI
-   - RULE-SET,github_domain,github         
-   - RULE-SET,WhatsApp_domain,WhatsApp
+   - RULE-SET,Perplexity_domain,Perplexity
+   - RULE-SET,github_domain,github 
+   - RULE-SET,cloudflare_domain,cloudflare 
+   - RULE-SET,Telegram_domain,Telegram
+   - RULE-SET,Youtube_domain,Youtube    
    - RULE-SET,Twitter_domain,Twitter
-   - RULE-SET,Amazon_domain,Amazon
-   - RULE-SET,Bybit_domain,Bybit
-   - RULE-SET,category_domain,category
-   - RULE-SET,Binance_domain,Binance
    - RULE-SET,TikTok_domain,TikTok
    - RULE-SET,Netflix_domain,Netflix
    - RULE-SET,Disney_domain,Disney
    - RULE-SET,HBO_domain,HBO
    - RULE-SET,Spotify_domain,Spotify
-   - RULE-SET,Steamcn_domain,直连
+   - RULE-SET,WhatsApp_domain,WhatsApp
+   - RULE-SET,Google_domain,Google
+   - RULE-SET,Amazon_domain,Amazon
+   - RULE-SET,Bybit_domain,Bybit
+   - RULE-SET,Binance_domain,Binance
+   - RULE-SET,category_domain,category
    - RULE-SET,Steam_domain,Steam
    - RULE-SET,Epic_domain,Epic
    - RULE-SET,EA_domain,EA
@@ -160,17 +162,15 @@ rules:
    - RULE-SET,nintend_domain,nintend
    - RULE-SET,Microsoft_domain,Microsoft
    - RULE-SET,Apple_domain,Apple
-   - RULE-SET,Perplexity_domain,Perplexity
    - RULE-SET,speedtest_domain,speedtest
    - RULE-SET,geolocation-!cn_domain,geolocation-!cn  
    - RULE-SET,China_domain,直连   
+   - RULE-SET,AI_IP,AI,no-resolve   
    - RULE-SET,Google_IP,Google,no-resolve
    - RULE-SET,Telegram_IP,Telegram,no-resolve
    - RULE-SET,Netflix_IP,Netflix,no-resolve
    - RULE-SET,cloudflare_IP,cloudflare,no-resolve
-   - RULE-SET,AI_IP,AI,no-resolve   
    - RULE-SET,Apple_IP,Apple,no-resolve 
-   - RULE-SET,private_IP,直连,no-resolve
    - RULE-SET,China_IP,直连,no-resolve   
    - MATCH,漏网之鱼
 # ========================
@@ -222,6 +222,7 @@ rule-providers:
   Apple_IP: {<<: *ip, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo-lite/geoip/apple.mrs"}
   AI_IP: {<<: *ip, url: "https://github.com/666OS/rules/raw/release/mihomo/ip/AI.mrs"}
   cloudflare_IP: {<<: *ip, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/cloudflare.mrs"}
+
 
 
 
