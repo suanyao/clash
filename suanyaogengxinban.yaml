@@ -47,6 +47,7 @@ dns:
   fake-ip-range: 198.18.0.1/16
   use-hosts: false
   use-system-hosts: false
+  respect-rules: false
   fake-ip-filter-mode: blacklist
   fake-ip-filter:  
     - "rule-set:Private_domain"
@@ -222,6 +223,7 @@ rule-providers:
   Apple_IP: {<<: *ip, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo-lite/geoip/apple.mrs"}
   AI_IP: {<<: *ip, url: "https://github.com/666OS/rules/raw/release/mihomo/ip/AI.mrs"}
   cloudflare_IP: {<<: *ip, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/cloudflare.mrs"}
+
 
 
 
