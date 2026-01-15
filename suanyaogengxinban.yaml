@@ -52,8 +52,8 @@ dns:
   fake-ip-filter-mode: blacklist
   fake-ip-filter:  
     - "rule-set:Private_domain"
-    - "rule-set:China_domain"
     - "rule-set:Apple-CN_domain"
+    - "rule-set:China_domain"
     - "hui.suanyao.top"
   proxy-server-nameserver:
     - https://dns.alidns.com/dns-query#h3=true
@@ -224,6 +224,7 @@ rule-providers:
   Apple_IP: {<<: *ip, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo-lite/geoip/apple.mrs"}
   AI_IP: {<<: *ip, url: "https://github.com/666OS/rules/raw/release/mihomo/ip/AI.mrs"}
   cloudflare_IP: {<<: *ip, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/cloudflare.mrs"}
+
 
 
 
