@@ -19,9 +19,9 @@ proxies:
   - {name: 直连, type: direct}
 # ========================
 # 主要端口设置
-# ========================
-port: 7890                                                                          
-socks-port: 7891     
+# ========================    
+port: 7890
+socks-port: 7891
 redir-port: 7892
 mixed-port: 7893
 tproxy-port: 7895
@@ -30,39 +30,33 @@ ipv6: false
 mode: rule
 log-level: warning
 bind-address: '*'
-domain-matcher: "hybrid"
 tcp-concurrent: true
-unified-delay: true  
-tcp-fast-open: true
-find-process-mode: 'off'      
+unified-delay: true 
+tcp-fast-open: true                   
+find-process-mode: 'off'                
 # ========================
 # DNS 设置
 # ========================
 dns:
-  enable: true
-  cache-size: 0        
-  cache-time: 0
-  listen: 0.0.0.0:7874
+  enable: true                                                                        
+  cache-max-ttl: 0                                                           
+  cache-min-ttl: 0
+  listen: 127.0.0.1:7874
   ipv6: false
   enhanced-mode: fake-ip
-  fake-ip-range: 198.18.0.1/16
+  fake-ip-range: 198.18.0.1/16 
   use-hosts: false
   use-system-hosts: false
-  respect-rules: false
+  respect-rules: false 
   fake-ip-filter-mode: blacklist
   fake-ip-filter:  
     - "rule-set:Private_domain"
     - "rule-set:China_domain"
-    - "hui.suanyao.top"
   proxy-server-nameserver:
     - https://dns.alidns.com/dns-query#h3=true
     - https://doh.pub/dns-query#h3=true
   nameserver:
-    - 127.0.0.1:5336
-  nameserver-policy:
-    "rule-set:China_domain": 127.0.0.1:5336
-    "rule-set:Private_domain": 127.0.0.1:5336
-    "rule-set:Apple-CN_domain": 127.0.0.1:5336
+    - 172.17.0.1:5336
 # ========================
 # TUN 模块
 # ========================
@@ -71,12 +65,12 @@ tun:
   stack: mixed
   device: utun
   dns-hijack:
-    - "127.0.0.1:53"
+     - "127.0.0.1:53"
   endpoint-independent-nat: true
   auto-route: false
   auto-detect-interface: false
   auto-redirect: false
-  strict-route: false 
+  strict-route: false
 # ========================
 # 实验性设置
 # ========================
@@ -88,14 +82,14 @@ profile:
 # ========================
 # 策略组定义
 # ========================
-默认: &default
-  输入: select
+default: &default
+  type: select
   proxies:
     - 直连
     - 美国节点       
 proxy-groups:
   - name: 美国节点
-    输入: select
+    type: select
     proxies: 
          - "🇺🇸 h2" 
   # ===== 业务分流组 =====
@@ -123,9 +117,9 @@ proxy-groups:
   - {name: playstation, type: select, proxies: [美国节点, 直连]}
   - {name: nintend, type: select, proxies: [美国节点, 直连]}
   - {name: Apple, type: select, proxies: [美国节点, 直连]}
-  - {name: Perplexity， type: select, proxies: [美国节点, 直连]}
+  - {name: Perplexity, type: select, proxies: [美国节点, 直连]}
   - {name: speedtest, type: select, proxies: [美国节点, 直连]}
-  - {name: Steam, type: select, proxies: [直连, 美国节点]}
+  - {name: Steam, type: select, proxies: [美国节点, 直连]}
   - {name: Microsoft, type: select, proxies: [直连, 美国节点]}
   - {name: geolocation-!cn, type: select, proxies: [美国节点, 直连]}
   - {name: 漏网之鱼, type: select, proxies: [美国节点, 直连]}
@@ -224,9 +218,6 @@ rule-providers:
   Apple_IP: {<<: *ip, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo-lite/geoip/apple.mrs"}
   AI_IP: {<<: *ip, url: "https://github.com/666OS/rules/raw/release/mihomo/ip/AI.mrs"}
   cloudflare_IP: {<<: *ip, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/cloudflare.mrs"}
-
-
-
 
 
 
