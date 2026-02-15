@@ -39,8 +39,8 @@ find-process-mode: 'off'
 # ========================
 dns:
   enable: true                                                                        
-  cache-max-ttl: 0                                                           
-  cache-min-ttl: 0
+  cache-max-ttl: 3600                                                          
+  cache-min-ttl: 300
   listen: 127.0.0.1:7874
   ipv6: false
   enhanced-mode: fake-ip
@@ -76,7 +76,7 @@ experimental:
   quic-go-disable-gso: true
 profile:
   store-selected: true
-  store-fake-ip: false
+  store-fake-ip: true
 # ========================
 # 策略组定义
 # ========================
@@ -87,7 +87,7 @@ default: &default
     - 美国节点       
 proxy-groups:
   - name: 美国节点
-    type: select
+    输入: select
     proxies: 
          - "🇺🇸 h2" 
   # ===== 业务分流组 =====
@@ -216,6 +216,7 @@ rule-providers:
   Apple_IP: {<<: *ip, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo-lite/geoip/apple.mrs"}
   AI_IP: {<<: *ip, url: "https://github.com/666OS/rules/raw/release/mihomo/ip/AI.mrs"}
   cloudflare_IP: {<<: *ip, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/cloudflare.mrs"}
+
 
 
 
