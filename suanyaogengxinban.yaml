@@ -39,8 +39,8 @@ find-process-mode: 'off'
 # ========================
 dns:
   enable: true                                                                        
-  cache-max-ttl: 0                                                        
-  cache-min-ttl: 0
+  cache-max-ttl: 3600                                                        
+  cache-min-ttl: 60
   listen: 0.0.0.0:7874
   ipv6: false
   enhanced-mode: fake-ip
@@ -58,7 +58,8 @@ dns:
     - "*.arpa"
     - "hui.suanyao.top"
   nameserver:
-    - 172.17.0.1:5336
+    - 202.103.224.68
+    - 202.103.225.68
 # ========================
 # TUN 模块
 # ========================
@@ -220,6 +221,7 @@ rule-providers:
   Apple_IP: {<<: *ip, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo-lite/geoip/apple.mrs"}
   AI_IP: {<<: *ip, url: "https://github.com/666OS/rules/raw/release/mihomo/ip/AI.mrs"}
   cloudflare_IP: {<<: *ip, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/cloudflare.mrs"}
+
 
 
 
