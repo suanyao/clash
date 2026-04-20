@@ -4,7 +4,7 @@
 proxy-providers:
   US-Provider:
     url: "http://192.168.5.5:3010/T3B9dgzBzdRbBF8ASb1E/download/DC3?target=ClashMeta"
-    type: http
+    输入: http
     interval: 86400
     health-check:
       enable: true
@@ -25,8 +25,6 @@ allow-lan: true
 ipv6: true
 mode: rule
 geodata-mode: false
-geo-auto-update: false
-geo-update-interval: 0
 log-level: warning
 bind-address: '*'
 tcp-concurrent: true
