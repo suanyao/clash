@@ -4,7 +4,7 @@
 proxy-providers:
   US-Provider:
     url: "http://192.168.5.5:3010/T3B9dgzBzdRbBF8ASb1E/download/DC3?target=ClashMeta"
-    type: http
+    输入: http
     interval: 86400
     health-check:
       enable: true
@@ -51,6 +51,8 @@ dns:
      - "rule-set:fakeipfilter_domain" 
      - "rule-set:httpdns-cn_domain"
      - "rule-set:China_domain"  
+     - "+.adguardteam.com"
+     - "adguardhome"
   default-nameserver:
      - tls://223.5.5.5
      - tls://1.12.12.12
